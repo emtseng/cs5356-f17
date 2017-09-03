@@ -1,9 +1,9 @@
 package dao;
 
 import api.ReceiptResponse;
-import generated.tables.records.ReceiptsRecord;
-import generated.tables.records.ReceiptsTagsRecord;
-import generated.tables.records.TagsRecord;
+import generated.tables.records.ReceiptRecord;
+import generated.tables.records.ReceiptTagRecord;
+import generated.tables.records.TagRecord;
 import org.jooq.Configuration;
 import org.jooq.DSLContext;
 import org.jooq.impl.DSL;

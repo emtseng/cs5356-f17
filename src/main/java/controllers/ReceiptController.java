@@ -3,7 +3,7 @@ package controllers;
 import api.CreateReceiptRequest;
 import api.ReceiptResponse;
 import dao.ReceiptDao;
-import generated.tables.records.ReceiptsRecord;
+import generated.tables.records.ReceiptRecord;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
