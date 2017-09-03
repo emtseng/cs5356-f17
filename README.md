@@ -1,9 +1,7 @@
-[![CircleCI](https://circleci.com/gh/amfleming/skeleton.svg?style=svg)](https://circleci.com/gh/amfleming/skeleton)
+[![CircleCI](https://circleci.com/gh/emtseng/cs5356-f17.svg?style=svg)](https://circleci.com/gh/emtseng/cs5356-f17)
 
 
-skeleton
-============
-A super simple foundation for building a scalable RESTful HTTP servers
+This project is built on Adam Fleming's [skeleton](https://github.com/amfleming/skeleton.git), a super simple foundation for building a scalable, RESTful HTTP server.
 
 To build and run with docker:
 1. Run `./gradlew distTar` _this tells gradle to make a .tar file containing the java application code and all dependencies_
