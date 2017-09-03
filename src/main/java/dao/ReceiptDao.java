@@ -1,9 +1,9 @@
 package dao;
 
 import api.ReceiptResponse;
-import generated.tables.records.ReceiptRecord;
-import generated.tables.records.ReceiptTagRecord;
-import generated.tables.records.TagRecord;
+
+import generated.tables.records.*;
+
 import org.jooq.Configuration;
 import org.jooq.DSLContext;
 import org.jooq.impl.DSL;
@@ -37,9 +37,14 @@ public class ReceiptDao {
         return dsl.selectFrom(RECEIPT).fetch();
     }
 
-    public List<ReceiptRecord> getTaggedReceipts(String tagQuery) {
-        return dsl.selectFrom(RECEIPT)
-                .where(TAG.tag.eq(tagQuery));
-    }
+    // public List<ReceiptRecord> getTaggedReceipts(String tagQuery) {
+    //     return dsl.selectFrom(RECEIPT)
+    //             .join(RECEIPT_TAG)
+    //             .on(RECEIPT.ID.eq(RECEIPT_TAG.RECEIPTID))
+    //             .join(TAG)
+    //             .on(RECEIPT_TAG.ID.eq(TAG.ID))
+    //             .where(TAG.TAG_.eq(tagQuery))
+    //             .fetch();
+    // }
 
 }

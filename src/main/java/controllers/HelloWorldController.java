@@ -3,9 +3,6 @@ package controllers;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Context;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpServletRequest;
-import io.dropwizard.jersey.sessions.Session;
 
 // For a Java class to be eligible to receive ANY requests
 // it must be annotated with at least @Path
@@ -13,17 +10,9 @@ import io.dropwizard.jersey.sessions.Session;
 @Produces(MediaType.APPLICATION_JSON)
 public class HelloWorldController {
 
-	// You can specify additional @Path steps; they will be relative
-	// to the @Path defined at the class level
 	@GET
-	@Path("/hello")
-	public String helloWorld(@Session HttpSession session) {
-		return "Hello World " + session.toString();
-	}
-
-	@GET
-	@Path("/et397")
-	public String helloGrader(@Session HttpSession session) {
-		return "et397";
+	@Path("/netid")
+	public String helloGrader() {
+		return "et397".toString();
 	}
 }
