@@ -24,7 +24,17 @@ import org.jooq.impl.SequenceImpl;
 public class Sequences {
 
 	/**
-	 * The sequence <code>public.system_sequence_989c496c_533d_4515_9cb2_e1af42b53c0f</code>
+	 * The sequence <code>public.system_sequence_0639dc98_4592_4c7f_b144_e62fdeace178</code>
 	 */
-	public static final Sequence<Long> SYSTEM_SEQUENCE_989C496C_533D_4515_9CB2_E1AF42B53C0F = new SequenceImpl<Long>("system_sequence_989c496c_533d_4515_9cb2_e1af42b53c0f", Public.PUBLIC, org.jooq.impl.SQLDataType.BIGINT);
+	public static final Sequence<Long> SYSTEM_SEQUENCE_0639DC98_4592_4C7F_B144_E62FDEACE178 = new SequenceImpl<Long>("system_sequence_0639dc98_4592_4c7f_b144_e62fdeace178", Public.PUBLIC, org.jooq.impl.SQLDataType.BIGINT);
+
+	/**
+	 * The sequence <code>public.system_sequence_2dce06c1_f379_4f7c_9a10_022864425380</code>
+	 */
+	public static final Sequence<Long> SYSTEM_SEQUENCE_2DCE06C1_F379_4F7C_9A10_022864425380 = new SequenceImpl<Long>("system_sequence_2dce06c1_f379_4f7c_9a10_022864425380", Public.PUBLIC, org.jooq.impl.SQLDataType.BIGINT);
+
+	/**
+	 * The sequence <code>public.system_sequence_d1ba1beb_c15b_4183_ad02_0cf8f03b6402</code>
+	 */
+	public static final Sequence<Long> SYSTEM_SEQUENCE_D1BA1BEB_C15B_4183_AD02_0CF8F03B6402 = new SequenceImpl<Long>("system_sequence_d1ba1beb_c15b_4183_ad02_0cf8f03b6402", Public.PUBLIC, org.jooq.impl.SQLDataType.BIGINT);
 }

@@ -20,4 +20,10 @@ public class HelloWorldController {
 	public String helloWorld(@Session HttpSession session) {
 		return "Hello World " + session.toString();
 	}
+
+	@GET
+	@Path("/et397")
+	public String helloGrader(@Session HttpSession session) {
+		return "et397";
+	}
 }
