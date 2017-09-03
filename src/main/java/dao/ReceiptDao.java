@@ -22,24 +22,24 @@ public class ReceiptDao {
     }
 
     public int insert(String merchantName, BigDecimal amount) {
-        ReceiptsRecord receiptsRecord = dsl
-                .insertInto(RECEIPTS, RECEIPTS.MERCHANT, RECEIPTS.AMOUNT) //receipts is the table
+        ReceiptRecord receiptRecord = dsl
+                .insertInto(RECEIPT, RECEIPT.MERCHANT, RECEIPT.AMOUNT) //receipt is the table
                 .values(merchantName, amount)
-                .returning(RECEIPTS.ID)
+                .returning(RECEIPT.ID)
                 .fetchOne();
 
-        checkState(receiptsRecord != null && receiptsRecord.getId() != null, "Insert failed");
+        checkState(receiptRecord != null && receiptRecord.getId() != null, "Insert failed");
 
-        return receiptsRecord.getId();
+        return receiptRecord.getId();
     }
 
-    public List<ReceiptsRecord> getAllReceipts() {
-        return dsl.selectFrom(RECEIPTS).fetch();
+    public List<ReceiptRecord> getAllReceipts() {
+        return dsl.selectFrom(RECEIPT).fetch();
     }
 
-    public List<ReceiptsRecord> getTaggedReceipts(String tagQuery) {
-        return dsl.selectFrom(RECEIPTS)
-                .where(TAGS.tag.eq(tagQuery));
+    public List<ReceiptRecord> getTaggedReceipts(String tagQuery) {
+        return dsl.selectFrom(RECEIPT)
+                .where(TAG.tag.eq(tagQuery));
     }
 
 }

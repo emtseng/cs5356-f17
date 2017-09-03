@@ -1,7 +1,7 @@
 package api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import generated.tables.records.ReceiptsRecord;
+import generated.tables.records.ReceiptRecord;
 
 import java.math.BigDecimal;
 import java.sql.Time;
@@ -28,7 +28,7 @@ public class ReceiptResponse {
     @JsonProperty
     Time created;
 
-    public ReceiptResponse(ReceiptsRecord dbRecord) {
+    public ReceiptResponse(ReceiptRecord dbRecord) {
         this.merchantName = dbRecord.getMerchant();
         this.value = dbRecord.getAmount();
         this.created = dbRecord.getUploaded();
