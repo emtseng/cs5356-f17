@@ -4,9 +4,9 @@
 package generated;
 
 
-import generated.tables.Receipts;
-import generated.tables.ReceiptsTags;
-import generated.tables.Tags;
+import generated.tables.Receipt;
+import generated.tables.ReceiptTag;
+import generated.tables.Tag;
 
 import javax.annotation.Generated;
 
@@ -25,17 +25,17 @@ import javax.annotation.Generated;
 public class Tables {
 
 	/**
-	 * The table public.tags
+	 * The table public.tag
 	 */
-	public static final Tags TAGS = generated.tables.Tags.TAGS;
+	public static final Tag TAG = generated.tables.Tag.TAG;
 
 	/**
-	 * The table public.receipts
+	 * The table public.receipt
 	 */
-	public static final Receipts RECEIPTS = generated.tables.Receipts.RECEIPTS;
+	public static final Receipt RECEIPT = generated.tables.Receipt.RECEIPT;
 
 	/**
-	 * The table public.receipts_tags
+	 * The table public.receipt_tag
 	 */
-	public static final ReceiptsTags RECEIPTS_TAGS = generated.tables.ReceiptsTags.RECEIPTS_TAGS;
+	public static final ReceiptTag RECEIPT_TAG = generated.tables.ReceiptTag.RECEIPT_TAG;
 }

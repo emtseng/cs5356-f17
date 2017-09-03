@@ -1,10 +1,10 @@
-CREATE TABLE tags (
+CREATE TABLE tag (
   id INT UNSIGNED AUTO_INCREMENT,
   tag VARCHAR(255),
   PRIMARY KEY (id)
 );
 
-CREATE TABLE receipts (
+CREATE TABLE receipt (
   id INT UNSIGNED AUTO_INCREMENT,
   uploaded TIME DEFAULT CURRENT_TIME(),
   merchant VARCHAR(255),
@@ -13,11 +13,11 @@ CREATE TABLE receipts (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE receipts_tags (
+CREATE TABLE receipt_tag (
   id INT UNSIGNED AUTO_INCREMENT,
   receiptId INT UNSIGNED,
   tagId INT UNSIGNED,
   PRIMARY KEY (id),
-  FOREIGN KEY (receiptId) REFERENCES receipts(id),
-  FOREIGN KEY (tagId) REFERENCES tags(id),
+  FOREIGN KEY (receiptId) REFERENCES receipt(id),
+  FOREIGN KEY (tagId) REFERENCES tag(id),
 );
