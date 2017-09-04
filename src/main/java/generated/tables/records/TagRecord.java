@@ -28,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record2<Integer, String> {
 
-	private static final long serialVersionUID = -381766804;
+	private static final long serialVersionUID = 165524320;
 
 	/**
 	 * Setter for <code>public.tag.id</code>.
@@ -45,16 +45,16 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record2
 	}
 
 	/**
-	 * Setter for <code>public.tag.tag</code>.
+	 * Setter for <code>public.tag.tagname</code>.
 	 */
-	public void setTag(String value) {
+	public void setTagname(String value) {
 		setValue(1, value);
 	}
 
 	/**
-	 * Getter for <code>public.tag.tag</code>.
+	 * Getter for <code>public.tag.tagname</code>.
 	 */
-	public String getTag() {
+	public String getTagname() {
 		return (String) getValue(1);
 	}
 
@@ -103,7 +103,7 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record2
 	 */
 	@Override
 	public Field<String> field2() {
-		return Tag.TAG.TAG_;
+		return Tag.TAG.TAGNAME;
 	}
 
 	/**
@@ -119,7 +119,7 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record2
 	 */
 	@Override
 	public String value2() {
-		return getTag();
+		return getTagname();
 	}
 
 	/**
@@ -136,7 +136,7 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record2
 	 */
 	@Override
 	public TagRecord value2(String value) {
-		setTag(value);
+		setTagname(value);
 		return this;
 	}
 
@@ -164,10 +164,10 @@ public class TagRecord extends UpdatableRecordImpl<TagRecord> implements Record2
 	/**
 	 * Create a detached, initialised TagRecord
 	 */
-	public TagRecord(Integer id, String tag) {
+	public TagRecord(Integer id, String tagname) {
 		super(Tag.TAG);
 
 		setValue(0, id);
-		setValue(1, tag);
+		setValue(1, tagname);
 	}
 }

@@ -1,6 +1,6 @@
 CREATE TABLE tag (
   id INT UNSIGNED AUTO_INCREMENT,
-  tag VARCHAR(255),
+  tagName VARCHAR(255),
   PRIMARY KEY (id)
 );
 
