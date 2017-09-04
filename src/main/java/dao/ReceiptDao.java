@@ -46,17 +46,23 @@ public class ReceiptDao {
 				.fetch().into(RECEIPT_TAG);
 	}
 
-	public void addTagToReceipt(String tagName, Integer receiptId) {
-		boolean tagExists = dsl.fetchExists(dsl.selectFrom(TAG).where(TAG.TAGNAME.eq(tagName)));
-		if (!tagExists) {
-			dsl.insertInto(TAG, TAG.TAGNAME).values(tagName).execute();
-		}
-		Integer tagId = dsl.selectFrom(TAG).where(TAG.TAGNAME.eq(tagName)).fetchOne().getValue(TAG.ID);
+	public boolean checkTagExists(String tagName) {
+		return dsl.fetchExists(dsl.selectFrom(TAG).where(TAG.TAGNAME.eq(tagName)));
+	}
+
+	public void addTag(String tagName) {
+		dsl.insertInto(TAG, TAG.TAGNAME).values(tagName).execute();
+	}
+
+	public void addTagToReceipt(Integer tagId, Integer receiptId) {
 		dsl.insertInto(RECEIPT_TAG, RECEIPT_TAG.TAGID, RECEIPT_TAG.RECEIPTID).values(tagId, receiptId).execute();
 	}
 
-	public void removeTagFromReceipt(String tagName, Integer receiptId) {
-		Integer tagId = dsl.select().from(TAG).where(TAG.TAGNAME.eq(tagName)).fetchOne().getValue(TAG.ID);
+	public Integer getTagId(String tagName) {
+		return dsl.select().from(TAG).where(TAG.TAGNAME.eq(tagName)).fetchOne().getValue(TAG.ID);
+	}
+
+	public void removeTagFromReceipt(Integer tagId, Integer receiptId) {
 		dsl.delete(RECEIPT_TAG)
 			.where(RECEIPT_TAG.TAGID.eq(tagId))
 			.and(RECEIPT_TAG.RECEIPTID.eq(receiptId))

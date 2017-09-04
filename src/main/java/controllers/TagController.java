@@ -21,11 +21,15 @@ public class TagController {
 
     @PUT
     public Response toggleTag(@PathParam("tag") String tagName, Integer receiptId) {
-        List<ReceiptTagRecord> receiptTags = receipts.getReceiptTags(tagName, receiptId);
-        if (receiptTags.size() > 0) {
-            receipts.removeTagFromReceipt(tagName, receiptId);
+        if (receipts.getReceiptTags(tagName, receiptId).size() > 0) {
+            Integer tagId = receipts.getTagId(tagName);
+            receipts.removeTagFromReceipt(tagId, receiptId);
         } else {
-            receipts.addTagToReceipt(tagName, receiptId);
+            if (!receipts.checkTagExists(tagName)) {
+                receipts.addTag(tagName);
+            }
+            Integer tagId = receipts.getTagId(tagName);
+            receipts.addTagToReceipt(tagId, receiptId);
         }
         return Response.status(200).build();
     }
