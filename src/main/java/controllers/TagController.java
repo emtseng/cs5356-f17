@@ -5,7 +5,7 @@ import dao.ReceiptDao;
 import generated.tables.records.*;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.*;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -20,13 +20,14 @@ public class TagController {
     }
 
     @PUT
-    public void toggleTag(@PathParam("tag") String tagName, Integer receiptId) {
+    public Response toggleTag(@PathParam("tag") String tagName, Integer receiptId) {
         List<ReceiptTagRecord> receiptTags = receipts.getReceiptTags(tagName, receiptId);
         if (receiptTags.size() > 0) {
             receipts.removeTagFromReceipt(tagName, receiptId);
         } else {
             receipts.addTagToReceipt(tagName, receiptId);
         }
+        return Response.status(200).build();
     }
 
     @GET
