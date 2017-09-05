@@ -2,7 +2,6 @@ package controllers;
 
 import api.ReceiptResponse;
 import dao.ReceiptDao;
-import generated.tables.records.*;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
@@ -22,14 +21,12 @@ public class TagController {
     @PUT
     public Response toggleTag(@PathParam("tag") String tagName, Integer receiptId) {
         if (receipts.getReceiptTags(tagName, receiptId).size() > 0) {
-            Integer tagId = receipts.getTagId(tagName);
-            receipts.removeTagFromReceipt(tagId, receiptId);
+            receipts.removeTagFromReceipt(receipts.getTagId(tagName), receiptId);
         } else {
             if (!receipts.checkTagExists(tagName)) {
                 receipts.addTag(tagName);
             }
-            Integer tagId = receipts.getTagId(tagName);
-            receipts.addTagToReceipt(tagId, receiptId);
+            receipts.addTagToReceipt(receipts.getTagId(tagName), receiptId);
         }
         return Response.status(200).build();
     }

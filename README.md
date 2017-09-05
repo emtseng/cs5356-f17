@@ -8,6 +8,11 @@ This project is built on Adam Fleming's [skeleton](https://github.com/amfleming/
 2. Run `docker build -t myapp .` _this runs the Dockerfile, and builds an image tagged with `myapp`.  See all images with `docker images`_
 3. Run `docker run -p 80:8080 myapp` _this runs the `myapp` image, routing port 80 on **Your Machine** to port 8080 in **the container**_
 
-## Uploading to DockerHub
+## Pushing to DockerHub
 1. Tag your image: `docker tag myapp YOUR_DOCKERHUB_NAME/myapp`
 2. Push: `docker push YOUR_DOCKERHUB_NAME/myapp`
+
+## Pushing to AWS (after setup)
+1. Run `docker images` to find the tag for your AWS cluster. It'll be something along the lines of `YOUR_ACCOUNT_ID.dkr.ecr.YOUR_REGION.amazonaws.com/YOUR_APP_NAME`
+2. Re-build an image tagged for your AWS cluster: `docker build -t YOUR_AWS_TAG .`
+3. Push the image: `docker push YOUR_AWS_TAG`

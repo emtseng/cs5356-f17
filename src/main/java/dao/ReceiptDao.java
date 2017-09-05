@@ -1,14 +1,11 @@
 package dao;
 
-import api.ReceiptResponse;
-
 import generated.tables.records.ReceiptRecord;
 import generated.tables.records.*;
 
 import org.jooq.Configuration;
 import org.jooq.DSLContext;
 import org.jooq.impl.DSL;
-import org.jooq.Record;
 
 import java.math.BigDecimal;
 import java.util.List;
