@@ -6,7 +6,7 @@ import dao.ReceiptDao;
 import io.dropwizard.Application;
 import io.dropwizard.Configuration;
 import io.dropwizard.setup.Environment;
-import org.eclipse.jetty.server.session.SessionHandler;
+// import org.eclipse.jetty.server.session.SessionHandler;
 import org.h2.jdbcx.JdbcConnectionPool;
 
 import org.jooq.SQLDialect;
@@ -17,9 +17,9 @@ public class SimpleApplication extends Application<Configuration> {
 		new SimpleApplication().run(args);
 	}
 
-	private static void enableSessionSupport(Environment env) {
-		env.servlets().setSessionHandler(new SessionHandler());
-	}
+	// private static void enableSessionSupport(Environment env) {
+	// 	env.servlets().setSessionHandler(new SessionHandler());
+	// }
 
 	public static org.jooq.Configuration setupJooq() {
 		// For now we are just going to use an H2 Database.  We'll upgrade to mysql later

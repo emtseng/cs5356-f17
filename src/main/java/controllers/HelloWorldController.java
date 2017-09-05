@@ -2,7 +2,6 @@ package controllers;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Context;
 
 // For a Java class to be eligible to receive ANY requests
 // it must be annotated with at least @Path
@@ -15,4 +14,5 @@ public class HelloWorldController {
 	public String helloGrader() {
 		return "et397";
 	}
+
 }
