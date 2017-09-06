@@ -6,6 +6,7 @@ import generated.tables.records.ReceiptRecord;
 
 import static org.mockito.Mockito.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,13 +18,11 @@ import org.junit.Test;
 import static org.hamcrest.CoreMatchers.*;
 
 import javax.ws.rs.core.Application;
-import javax.ws.rs.core.Response;
 
 public class ReceiptControllerTest extends JerseyTest {
 
   private ReceiptController service;
   private ReceiptDao dao;
-
 
   @Override
   protected Application configure() {
@@ -39,12 +38,12 @@ public class ReceiptControllerTest extends JerseyTest {
   @Test
   public void checkGETReceipts() {
     //Create fake data
-    List<ReceiptRecord> mockReceipts = new ArrayList<ReceiptRecord>();
+    List<ReceiptRecord> fakeReceipts = new ArrayList<ReceiptRecord>();
     ReceiptRecord fakeRecord = new ReceiptRecord();
-    mockReceipts.add(fakeRecord);
+    fakeReceipts.add(fakeRecord);
 
     //Set when...thenReturn for mock dao
-    when(dao.getAllReceipts()).thenReturn(mockReceipts);
+    when(dao.getAllReceipts()).thenReturn(fakeReceipts);
 
     //Call the method we want to test
     List<ReceiptResponse> getReceiptsResponse = service.getReceipts();
@@ -53,4 +52,17 @@ public class ReceiptControllerTest extends JerseyTest {
     verify(dao).getAllReceipts();
     Assert.assertThat(getReceiptsResponse.get(0), instanceOf(ReceiptResponse.class));
   }
+
+  @Test
+  public void checkPOSTReceipts() {
+    CreateReceiptRequest receipt = new CreateReceiptRequest();
+    receipt.merchant = "Duane Reade";
+    receipt.amount = new BigDecimal(20);
+
+    Integer createReceiptResponse = service.createReceipt(receipt);
+
+    verify(dao).insert(receipt.merchant, receipt.amount);
+    Assert.assertThat(createReceiptResponse, instanceOf(Integer.class));
+  }
+
 }
