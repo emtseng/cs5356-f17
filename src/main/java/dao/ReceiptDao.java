@@ -5,10 +5,14 @@ import generated.tables.records.*;
 
 import org.jooq.Configuration;
 import org.jooq.DSLContext;
+import org.jooq.Record;
+import org.jooq.Result;
 import org.jooq.impl.DSL;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkState;
 import static generated.Tables.*;
@@ -31,6 +35,15 @@ public class ReceiptDao {
 
 	public List<ReceiptRecord> getAllReceipts() {
 		return dsl.selectFrom(RECEIPT).fetch();
+	}
+
+	public List<String> getAllTagsForReceipt(Integer receiptId) {
+		return dsl.select()
+			.from(TAG
+				.join(RECEIPT_TAG).on(RECEIPT_TAG.TAGID.eq(TAG.ID))
+				.join(RECEIPT).on(RECEIPT.ID.eq(RECEIPT_TAG.RECEIPTID)))
+			.where(RECEIPT.ID.eq(receiptId))
+			.fetch().getValues(TAG.TAGNAME);
 	}
 
 	public List<ReceiptTagRecord> getReceiptTags(String tagName, Integer receiptId) {

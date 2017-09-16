@@ -8,8 +8,6 @@ import generated.tables.records.TagRecord;
 
 import static generated.Tables.*;
 
-import dao.ReceiptDao;
-
 import java.math.BigDecimal;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -26,31 +24,27 @@ import org.jooq.Record;
  * Any properties that you want exposed when this class is translated to JSON must be
  * annotated with {@link JsonProperty}
  */
-public class ReceiptResponse {
-    @JsonProperty
-    Integer id;
+public class ReceiptWithTags {
+  @JsonProperty
+  Integer id;
 
-    @JsonProperty
-    String merchantName;
+  @JsonProperty
+  String merchantName;
 
-    @JsonProperty
-    BigDecimal value;
+  @JsonProperty
+  BigDecimal value;
 
-    @JsonProperty
-    Time created;
+  @JsonProperty
+  Time created;
 
-    @JsonProperty
-    List<String> tags = new ArrayList<String>();
+  @JsonProperty
+  List<String> tags = new ArrayList<String>();
 
-    public ReceiptResponse(ReceiptRecord dbRecord) {
-        this.merchantName = dbRecord.getMerchant();
-        this.value = dbRecord.getAmount();
-        this.created = dbRecord.getUploaded();
-        this.id = dbRecord.getId();
-        // this.tags = ;
-    }
-
-    public Integer getId() {
-        return id;
-    }
+  public ReceiptWithTags(ReceiptResponse response, List<String> tags) {
+    this.merchantName = response.merchantName;
+    this.value = response.value;
+    this.created = response.created;
+    this.id = response.id;
+    this.tags = tags;
+  }
 }

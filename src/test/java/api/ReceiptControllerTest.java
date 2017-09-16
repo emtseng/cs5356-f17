@@ -46,11 +46,11 @@ public class ReceiptControllerTest extends JerseyTest {
     when(dao.getAllReceipts()).thenReturn(fakeReceipts);
 
     //Call the method we want to test
-    List<ReceiptResponse> getReceiptsResponse = service.getReceipts();
+    List<ReceiptWithTags> getReceiptsResponse = service.getReceipts();
 
     //Check behavior with verify and assertions
     verify(dao).getAllReceipts();
-    Assert.assertThat(getReceiptsResponse.get(0), instanceOf(ReceiptResponse.class));
+    Assert.assertThat(getReceiptsResponse.get(0), instanceOf(ReceiptWithTags.class));
   }
 
   @Test

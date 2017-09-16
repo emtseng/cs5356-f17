@@ -9,7 +9,13 @@ class ReceiptList extends React.Component {
             <div className="receipt">
               <div className="merchant">{receipt.merchantName}</div>
               <div className="amount">{receipt.value}</div>
-              <div className="tags">{receipt.tags}</div>
+              <div className="tags">
+                {receipt.tags && receipt.tags.map(tag => (
+                  <button>
+                    {tag}
+                  </button>
+                ))}
+              </div>
             </div>
           ))
         }
