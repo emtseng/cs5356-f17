@@ -1,19 +1,11 @@
 package api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
-import generated.tables.records.ReceiptRecord;
-import generated.tables.records.TagRecord;
-
-import static generated.Tables.*;
 
 import java.math.BigDecimal;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.jooq.Record;
 
 /**
  * This is an API Object.  Its purpose is to model the JSON API that we expose.

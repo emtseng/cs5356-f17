@@ -5,19 +5,13 @@ import api.ReceiptResponse;
 import api.ReceiptWithTags;
 import dao.ReceiptDao;
 import generated.tables.records.ReceiptRecord;
-import generated.tables.records.ReceiptTagRecord;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-import org.jooq.Record;
-import org.jooq.Result;
-
 import java.util.List;
-import java.util.Map;
-
 import static java.util.stream.Collectors.toList;
 
 @Path("/receipts")
