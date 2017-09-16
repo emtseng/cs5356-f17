@@ -14,6 +14,7 @@ class App extends Component {
     this.getReceipts = this.getReceipts.bind(this)
     this.toggleAddReceipt = this.toggleAddReceipt.bind(this)
     this.saveReceipt = this.saveReceipt.bind(this)
+    this.toggleTag = this.toggleTag.bind(this)
   }
   componentDidMount() {
     this.getReceipts()
@@ -25,7 +26,6 @@ class App extends Component {
   toggleAddReceipt(evt) {
     evt.preventDefault()
     evt.stopPropagation()
-    console.log('fired toggleAddReceipt')
     this.setState({
       showAddReceipt: !this.state.showAddReceipt
     })
@@ -34,7 +34,18 @@ class App extends Component {
     evt.preventDefault()
     evt.stopPropagation()
     axios.post(`/api/receipts`, { merchant, amount })
-    .then(res => this.getReceipts())
+      .then(res => this.getReceipts())
+      .catch(err => console.error(err))
+  }
+  toggleTag(evt, tag, receiptId) {
+    evt.preventDefault()
+    axios.put(`/api/tags/${tag}`, JSON.stringify(receiptId), {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => this.getReceipts())
+      .catch(err => console.error(err))
   }
   render() {
     return (
@@ -45,7 +56,7 @@ class App extends Component {
             onClick={evt => this.toggleAddReceipt(evt)}
             id="add-receipt"
           >
-            +
+            <i className="fa fa-plus" aria-hidden="true" />
           </button>
         </div>
         {
@@ -55,7 +66,10 @@ class App extends Component {
               cancel={this.toggleAddReceipt} /> :
             null
         }
-        <ReceiptList receipts={this.state.receipts} />
+        <ReceiptList
+          receipts={this.state.receipts}
+          toggleTag={this.toggleTag}
+        />
       </div>
     )
   }
