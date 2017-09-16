@@ -115,9 +115,6 @@ node {
   // Version of node to use.
   version = '7.7.4'
 
-  // Version of npm to use.
-  npmVersion = '4.1.2'
-
   // Base URL for fetching node distributions (change if you have a mirror).
   distBaseUrl = 'https://nodejs.org/dist'
 
@@ -133,6 +130,9 @@ node {
 
   // Set the work directory where node_modules should be located
   nodeModulesDir = file("${project.projectDir}")
+}
+npm_install {
+    args = ['--no-optional']
 }
 
 npm_run {
