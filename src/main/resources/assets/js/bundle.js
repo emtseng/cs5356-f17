@@ -34531,15 +34531,22 @@ var ReceiptTags = function (_Component) {
       tagInputs: []
     };
     _this.handleAddTag = _this.handleAddTag.bind(_this);
+    _this.removeTagInput = _this.removeTagInput.bind(_this);
     return _this;
   }
 
   _createClass(ReceiptTags, [{
+    key: 'removeTagInput',
+    value: function removeTagInput() {
+      this.setState({ tagInputs: [] });
+    }
+  }, {
     key: 'handleAddTag',
     value: function handleAddTag(evt) {
       evt.preventDefault();
       this.setState({ tagInputs: this.state.tagInputs.concat([_react2.default.createElement(_TagInput2.default, {
           toggleTag: this.props.toggleTag,
+          removeTagInput: this.removeTagInput,
           receiptId: this.props.receiptId
         })]) });
     }
@@ -34640,7 +34647,7 @@ var TagInput = function (_Component) {
     value: function handleTagSubmit(evt) {
       evt.preventDefault();
       this.props.toggleTag(evt, this.state.value, this.props.receiptId);
-      this.setState({ value: '' });
+      this.props.removeTagInput();
     }
   }, {
     key: 'render',

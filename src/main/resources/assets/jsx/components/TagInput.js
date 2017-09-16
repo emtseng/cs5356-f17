@@ -18,7 +18,7 @@ class TagInput extends Component {
   handleTagSubmit(evt) {
     evt.preventDefault()
     this.props.toggleTag(evt, this.state.value, this.props.receiptId)
-    this.setState({ value: '' })
+    this.props.removeTagInput()
   }
   render() {
     return (

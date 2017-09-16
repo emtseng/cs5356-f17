@@ -10,12 +10,17 @@ class ReceiptTags extends Component {
       tagInputs: []
     }
     this.handleAddTag = this.handleAddTag.bind(this)
+    this.removeTagInput = this.removeTagInput.bind(this)
+  }
+  removeTagInput() {
+    this.setState({ tagInputs: [] })
   }
   handleAddTag(evt) {
     evt.preventDefault()
     this.setState({ tagInputs: this.state.tagInputs.concat([
       <TagInput
         toggleTag={this.props.toggleTag}
+        removeTagInput={this.removeTagInput}
         receiptId={this.props.receiptId}
       />
     ]) })
