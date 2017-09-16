@@ -15,7 +15,7 @@ buildscript {
     dependencies {
         classpath 'org.jooq:jooq-codegen:3.7.4'
         classpath 'com.h2database:h2:1.4.177'
-        classpath "com.moowork.gradle:gradle-node-plugin:0.11"
+        classpath "com.moowork.gradle:gradle-node-plugin:1.2.0"
     }
 }
 
