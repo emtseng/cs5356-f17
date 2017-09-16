@@ -113,5 +113,5 @@ npm_run {
   args = ['webpack']
 }
 
-processResources.dependsOn('npm_install', 'npm_run')
+processResources.dependsOn('nodeSetup', 'npm_install', 'npm_run')
 
