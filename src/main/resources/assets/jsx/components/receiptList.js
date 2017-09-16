@@ -3,23 +3,30 @@ import React from 'react'
 class ReceiptList extends React.Component {
   render() {
     return (
-      <div id="receiptList">
+      <table id="receiptList">
+        <tr>
+          <th>Time</th>
+          <th>Merchant</th>
+          <th>Amount</th>
+          <th>Tags</th>
+        </tr>
         {
           this.props.receipts && this.props.receipts.map(receipt => (
-            <div className="receipt">
-              <div className="merchant">{receipt.merchantName}</div>
-              <div className="amount">{receipt.value}</div>
-              <div className="tags">
+            <tr className="receipt">
+              <td className="time">{receipt.created}</td>
+              <td className="merchant">{receipt.merchantName}</td>
+              <td className="amount">{receipt.value}</td>
+              <td className="tags">
                 {receipt.tags && receipt.tags.map(tag => (
                   <button>
                     {tag}
                   </button>
                 ))}
-              </div>
-            </div>
+              </td>
+            </tr>
           ))
         }
-      </div>
+      </table>
     )
   }
 }

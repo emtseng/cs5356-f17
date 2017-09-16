@@ -23142,8 +23142,9 @@ var App = function (_Component) {
     }
   }, {
     key: 'toggleAddReceipt',
-    value: function toggleAddReceipt(event) {
-      event.preventDefault();
+    value: function toggleAddReceipt(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
       console.log('fired toggleAddReceipt');
       this.setState({
         showAddReceipt: !this.state.showAddReceipt
@@ -23155,6 +23156,7 @@ var App = function (_Component) {
       var _this3 = this;
 
       evt.preventDefault();
+      evt.stopPropagation();
       _axios2.default.post('/api/receipts', { merchant: merchant, amount: amount }).then(function (res) {
         return _this3.getReceipts();
       });
@@ -24111,24 +24113,53 @@ var ReceiptList = function (_React$Component) {
     key: "render",
     value: function render() {
       return _react2.default.createElement(
-        "div",
+        "table",
         { id: "receiptList" },
+        _react2.default.createElement(
+          "tr",
+          null,
+          _react2.default.createElement(
+            "th",
+            null,
+            "Time"
+          ),
+          _react2.default.createElement(
+            "th",
+            null,
+            "Merchant"
+          ),
+          _react2.default.createElement(
+            "th",
+            null,
+            "Amount"
+          ),
+          _react2.default.createElement(
+            "th",
+            null,
+            "Tags"
+          )
+        ),
         this.props.receipts && this.props.receipts.map(function (receipt) {
           return _react2.default.createElement(
-            "div",
+            "tr",
             { className: "receipt" },
             _react2.default.createElement(
-              "div",
+              "td",
+              { className: "time" },
+              receipt.created
+            ),
+            _react2.default.createElement(
+              "td",
               { className: "merchant" },
               receipt.merchantName
             ),
             _react2.default.createElement(
-              "div",
+              "td",
               { className: "amount" },
               receipt.value
             ),
             _react2.default.createElement(
-              "div",
+              "td",
               { className: "tags" },
               receipt.tags && receipt.tags.map(function (tag) {
                 return _react2.default.createElement(
