@@ -24127,8 +24127,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var ReceiptList = function (_React$Component) {
-  _inherits(ReceiptList, _React$Component);
+var ReceiptList = function (_Component) {
+  _inherits(ReceiptList, _Component);
 
   function ReceiptList(props) {
     _classCallCheck(this, ReceiptList);
@@ -24207,7 +24207,7 @@ var ReceiptList = function (_React$Component) {
   }]);
 
   return ReceiptList;
-}(_react2.default.Component);
+}(_react.Component);
 
 exports.default = ReceiptList;
 
@@ -24499,3 +24499,4 @@ exports.default = AddReceipt;
 
 /***/ })
 /******/ ]);
+//# sourceMappingURL=bundle.js.map
