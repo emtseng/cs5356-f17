@@ -4,8 +4,8 @@ class AddReceipt extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      merchant: '',
-      amount: ''
+      merchant: 'Merchant',
+      amount: 'Amount'
     }
     this.handleFormEntry = this.handleFormEntry.bind(this)
   }
@@ -18,9 +18,7 @@ class AddReceipt extends Component {
   render() {
     return (
       <div id="receipt-entry">
-        <form
-          onSubmit={evt => this.props.saveReceipt(evt, this.state.merchant, this.state.amount)}
-          >
+        <form>
           <input
             id="merchant"
             name="merchant"
@@ -45,7 +43,7 @@ class AddReceipt extends Component {
           </button>
           <button
             id="save-receipt"
-            type="submit"
+            onClick={evt => this.props.saveReceipt(evt, this.state.merchant, this.state.amount)}
           >
             Save
           </button>
