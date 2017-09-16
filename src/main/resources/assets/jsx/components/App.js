@@ -22,8 +22,9 @@ class App extends Component {
     axios.get(`/api/receipts`)
       .then(res => this.setState({ receipts: res.data }))
   }
-  toggleAddReceipt(event) {
-    event.preventDefault()
+  toggleAddReceipt(evt) {
+    evt.preventDefault()
+    evt.stopPropagation()
     console.log('fired toggleAddReceipt')
     this.setState({
       showAddReceipt: !this.state.showAddReceipt
@@ -31,6 +32,7 @@ class App extends Component {
   }
   saveReceipt(evt, merchant, amount) {
     evt.preventDefault()
+    evt.stopPropagation()
     axios.post(`/api/receipts`, { merchant, amount })
     .then(res => this.getReceipts())
   }

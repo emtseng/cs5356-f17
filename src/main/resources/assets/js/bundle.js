@@ -24185,8 +24185,8 @@ var AddReceipt = function (_Component) {
     var _this = _possibleConstructorReturn(this, (AddReceipt.__proto__ || Object.getPrototypeOf(AddReceipt)).call(this, props));
 
     _this.state = {
-      merchant: '',
-      amount: ''
+      merchant: 'Merchant',
+      amount: 'Amount'
     };
     _this.handleFormEntry = _this.handleFormEntry.bind(_this);
     return _this;
@@ -24208,11 +24208,7 @@ var AddReceipt = function (_Component) {
         { id: 'receipt-entry' },
         _react2.default.createElement(
           'form',
-          {
-            onSubmit: function onSubmit(evt) {
-              return _this2.props.saveReceipt(evt, _this2.state.merchant, _this2.state.amount);
-            }
-          },
+          null,
           _react2.default.createElement('input', {
             id: 'merchant',
             name: 'merchant',
@@ -24241,7 +24237,9 @@ var AddReceipt = function (_Component) {
             'button',
             {
               id: 'save-receipt',
-              type: 'submit'
+              onClick: function onClick(evt) {
+                return _this2.props.saveReceipt(evt, _this2.state.merchant, _this2.state.amount);
+              }
             },
             'Save'
           )
