@@ -1,11 +1,14 @@
+/*
+
+Webpack on Linux has trouble with specifically this import. Why?
+
+*/
+
 import React, { Component } from 'react'
 
 import ReceiptTags from './ReceiptTags.js'
 
 class ReceiptList extends Component {
-  constructor(props) {
-    super(props)
-  }
   render() {
     return (
       <table id="receiptList">
