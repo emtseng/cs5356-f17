@@ -23159,6 +23159,8 @@ var App = function (_Component) {
       evt.stopPropagation();
       _axios2.default.post('/api/receipts', { merchant: merchant, amount: amount }).then(function (res) {
         return _this3.getReceipts();
+      }).then(function () {
+        return _this3.setState({ showAddReceipt: false });
       }).catch(function (err) {
         return console.error(err);
       });

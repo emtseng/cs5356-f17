@@ -35,6 +35,7 @@ class App extends Component {
     evt.stopPropagation()
     axios.post(`/api/receipts`, { merchant, amount })
       .then(res => this.getReceipts())
+      .then(() => this.setState({ showAddReceipt: false }))
       .catch(err => console.error(err))
   }
   toggleTag(evt, tag, receiptId) {

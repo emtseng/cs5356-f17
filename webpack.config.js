@@ -20,7 +20,6 @@ module.exports = {
         options: {
           presets: ['react', 'env']
         },
-        include: SRC,
         exclude: /(node_modules)/
       }
     ]
