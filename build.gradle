@@ -15,7 +15,7 @@ buildscript {
     dependencies {
         classpath 'org.jooq:jooq-codegen:3.7.4'
         classpath 'com.h2database:h2:1.4.177'
-        classpath "com.moowork.gradle:gradle-node-plugin:1.2.0"
+        classpath "com.moowork.gradle:gradle-node-plugin:1.1.0"
     }
 }
 
@@ -62,7 +62,7 @@ dependencies {
     compile 'org.jooq:jooq:3.9.5'                       // DSL for SQL in java
     compile 'com.h2database:h2:1.4.196'                 // in-memory SQL. we'll upgrade to mysql later
 
-    compile 'com.moowork.gradle:gradle-node-plugin:1.2.0'   //gradle node plugin
+    compile 'com.moowork.gradle:gradle-node-plugin:1.1.0'   //gradle node plugin
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.hamcrest:hamcrest-all:1.3'
