@@ -1,0 +1,33 @@
+{
+  "name": "receipt-tracker",
+  "version": "1.0.0",
+  "description": "A receipt tracker app built for CS5356",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack-dev": "webpack -w",
+    "webpack": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emtseng/cs5356-f17.git"
+  },
+  "author": "@emtseng",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emtseng/cs5356-f17/issues"
+  },
+  "homepage": "https://github.com/emtseng/cs5356-f17#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-tools": "^0.13.3",
+    "webpack": "^3.6.0"
+  }
+}

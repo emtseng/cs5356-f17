@@ -15,6 +15,7 @@ buildscript {
     dependencies {
         classpath 'org.jooq:jooq-codegen:3.7.4'
         classpath 'com.h2database:h2:1.4.177'
+        classpath "com.moowork.gradle:gradle-node-plugin:0.11"
     }
 }
 
@@ -23,6 +24,9 @@ apply plugin: 'java'
 
 // Apply the application plugin to add support for building and running an application
 apply plugin: 'application'
+
+// Add support for node so we can use webpack
+apply plugin: "com.moowork.node"
 
 // Define the main class for the application.  This is what gets executed when you do `gradle run`
 mainClassName = 'SimpleApplication'
@@ -53,6 +57,7 @@ dependencies {
     compile 'com.google.guava:guava:22.0'               // Great java utility library
     compile 'io.dropwizard:dropwizard-core:1.2.0-rc2'   // Great implementation of many basic Java Server libs
     compile 'io.dropwizard:dropwizard-db:1.2.0-rc2'     // Provides manages data sources
+    compile 'io.dropwizard:dropwizard-assets:1.2.0-rc2' // Provides asset service
 
     compile 'org.jooq:jooq:3.9.5'                       // DSL for SQL in java
     compile 'com.h2database:h2:1.4.196'                 // in-memory SQL. we'll upgrade to mysql later
@@ -103,3 +108,10 @@ task generate {
         )
     }
 }
+
+npm_run {
+  args = ['webpack']
+}
+
+processResources.dependsOn('npm_install', 'npm_run')
+
