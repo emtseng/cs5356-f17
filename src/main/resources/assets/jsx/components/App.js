@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
-import ReceiptList from './ReceiptList'
-import AddReceipt from './AddReceipt'
+import ReceiptList from './ReceiptList.js'
+import AddReceipt from './AddReceipt.js'
 
 class App extends Component {
   constructor(props) {

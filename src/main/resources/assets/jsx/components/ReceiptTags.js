@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 
-import TagInput from './TagInput'
+import TagInput from './TagInput.js'
 
 class ReceiptTags extends Component {
   constructor(props) {

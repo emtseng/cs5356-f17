@@ -1,17 +1,10 @@
 import React from 'react'
-import $ from 'jquery'
-import axios from 'axios'
 
-import ReceiptTags from './ReceiptTags'
+import ReceiptTags from './ReceiptTags.js'
 
 class ReceiptList extends React.Component {
   constructor(props) {
     super(props)
-    this.addTag = this.addTag.bind(this)
-  }
-  addTag(evt, id) {
-    evt.preventDefault()
-    $(`#tag_input-${id}`).show();
   }
   render() {
     return (
