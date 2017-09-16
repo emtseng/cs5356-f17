@@ -8,6 +8,8 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx']
   },
+  context: ROOT,
+  devtool: 'source-map',
   output: {
     path: DEST,
     filename: 'bundle.js'

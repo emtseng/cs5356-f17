@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import ReceiptTags from './ReceiptTags.js'
 
-class ReceiptList extends React.Component {
+class ReceiptList extends Component {
   constructor(props) {
     super(props)
   }
