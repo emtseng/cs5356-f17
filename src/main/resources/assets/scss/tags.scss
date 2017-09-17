@@ -1,0 +1,24 @@
+.tags {
+  width: 30%;
+  .receipt-tags {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    .tag-input-wrapper {
+      .tag_input {
+        margin: 0.5em 0;
+        width: 30%;
+        border: none;
+        font-size: 1em;
+      }
+      .tag_cancel {
+        display: inline-block;
+        margin-left: 0.5em;
+      }
+    }
+    .tagValue {
+      margin: 0.5em;
+    }
+  }
+}

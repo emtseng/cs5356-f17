@@ -1,10 +1,21 @@
 package api;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import generated.tables.records.ReceiptRecord;
+import generated.tables.records.TagRecord;
+
+import static generated.Tables.*;
+
+import dao.ReceiptDao;
 
 import java.math.BigDecimal;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.jooq.Record;
 
 /**
  * This is an API Object.  Its purpose is to model the JSON API that we expose.
@@ -28,10 +39,18 @@ public class ReceiptResponse {
     @JsonProperty
     Time created;
 
+    @JsonProperty
+    List<String> tags = new ArrayList<String>();
+
     public ReceiptResponse(ReceiptRecord dbRecord) {
         this.merchantName = dbRecord.getMerchant();
         this.value = dbRecord.getAmount();
         this.created = dbRecord.getUploaded();
         this.id = dbRecord.getId();
+        // this.tags = ;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

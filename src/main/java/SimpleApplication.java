@@ -1,12 +1,14 @@
 import controllers.HelloWorldController;
+import controllers.StaticHtmlController;
 import controllers.ReceiptController;
 import controllers.TagController;
 
 import dao.ReceiptDao;
 import io.dropwizard.Application;
 import io.dropwizard.Configuration;
+import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-// import org.eclipse.jetty.server.session.SessionHandler;
+import io.dropwizard.assets.*;
 import org.h2.jdbcx.JdbcConnectionPool;
 
 import org.jooq.SQLDialect;
@@ -35,6 +37,11 @@ public class SimpleApplication extends Application<Configuration> {
 	}
 
 	@Override
+	public void initialize(Bootstrap<Configuration> bootstrap) {
+		bootstrap.addBundle(new AssetsBundle("/assets", "/", "index.html"));
+	}
+
+	@Override
 	public void run(Configuration cfg, Environment env) {
 		// Create any global resources you need here
 		org.jooq.Configuration jooqConfig = setupJooq();
@@ -45,5 +52,6 @@ public class SimpleApplication extends Application<Configuration> {
 		env.jersey().register(new HelloWorldController());
 		env.jersey().register(new ReceiptController(receiptDao));
 		env.jersey().register(new TagController(receiptDao));
+		env.jersey().setUrlPattern("/api/*");
 	}
 }

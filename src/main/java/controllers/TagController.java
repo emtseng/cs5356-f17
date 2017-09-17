@@ -1,6 +1,7 @@
 package controllers;
 
 import api.ReceiptResponse;
+import api.ReceiptWithTags;
 import dao.ReceiptDao;
 
 import javax.ws.rs.*;
@@ -14,6 +15,7 @@ import static java.util.stream.Collectors.toList;
 @Produces(MediaType.APPLICATION_JSON)
 public class TagController {
     final ReceiptDao receipts;
+
     public TagController(ReceiptDao receipts) {
         this.receipts = receipts;
     }
@@ -32,8 +34,15 @@ public class TagController {
     }
 
     @GET
-    public List<ReceiptResponse> getTaggedReceipts(@PathParam("tag") String tagName) {
-        return receipts.getTaggedReceipts(tagName).stream().map(ReceiptResponse::new).collect(toList());
+    public List<ReceiptWithTags> getTaggedReceipts(@PathParam("tag") String tagName) {
+        List<ReceiptResponse> receiptResponses = receipts.getTaggedReceipts(tagName).stream().map(ReceiptResponse::new)
+                .collect(toList());
+        return receiptResponses
+            .stream()
+            .map(receipt -> new ReceiptWithTags(
+                receipt,
+                receipts.getAllTagsForReceipt(receipt.getId())))
+            .collect(toList());
     }
 
 }

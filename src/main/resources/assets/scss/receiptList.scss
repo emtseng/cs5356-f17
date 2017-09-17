@@ -1,0 +1,42 @@
+#receiptList-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .col-time {
+    width: 20%
+  }
+  .col-merchant {
+    width: 30%
+  }
+  .col-amount {
+    width: 10%
+  }
+  .col-tags {
+    width: 40%
+  }
+  #receiptList-header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    font-weight: bolder;
+  }
+  #receiptList {
+    text-align: center;
+    width: 100%;
+    margin-top: 1.5em;
+    .receipt {
+      display: inline-flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: baseline;
+      width: 100%;
+    }
+  }
+}
+
+
