@@ -1,0 +1,83 @@
+$add-bg-color: mediumaquamarine;
+$add-font-color: white;
+
+* {
+  box-sizing: border-box;
+  font-family: 'Roboto Mono', monospace;
+}
+
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.action-btn {
+  width: 60%;
+  background-color: $add-bg-color;
+  color: $add-font-color;
+  border-radius: 15px;
+  border: none;
+  padding: 5px;
+  margin: 0.5em;
+  font-size: 0.8em
+}
+
+#main {
+  min-width: 60vw;
+  max-width: 90vw;
+  display: inline-flex;
+  flex-direction: column;
+  #head {
+    width: 100%;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    h1 {
+      margin-right: 1em;
+    }
+    #add-receipt {
+      width: 30%
+    }
+  }
+  #receipt-entry {
+    display: inline-flex;
+    flex-direction: column;
+    margin-bottom: 1.5em;
+    #merchant, #amount {
+      display: block;
+      width: 100%;
+      margin-bottom: 1em;
+      border: none;
+      border-bottom: solid 0.5px;
+      font-size: 1em;
+    }
+    #receipt-btns {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      #save-receipt {
+        @extend .action-btn;
+        width: 30%
+      }
+      #cancel-receipt {
+        @extend .action-btn;
+        width: 30%;
+        background-color: white;
+        color: black;
+      }
+    }
+  }
+}
+
+@import 'receiptList';
+@import 'tags';

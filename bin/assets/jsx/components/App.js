@@ -53,18 +53,32 @@ class App extends Component {
       <div id="main">
         <div id="head">
           <h1>My Receipts</h1>
-          <button
-            onClick={evt => this.toggleAddReceipt(evt)}
-            id="add-receipt"
-          >
-            <i className="fa fa-plus" aria-hidden="true" />
-          </button>
+          {
+            this.state.showAddReceipt ?
+              (<button
+                onClick={evt => this.toggleAddReceipt(evt)}
+                id="add-receipt"
+                className="action-btn"
+              >
+                <i className="fa fa-caret-up" aria-hidden="true" />&nbsp;Collapse
+              </button>
+              ) :
+              (
+                <button
+                  onClick={evt => this.toggleAddReceipt(evt)}
+                  id="add-receipt"
+                  className="action-btn"
+                >
+                  <i className="fa fa-plus" aria-hidden="true" />&nbsp;Add Receipt
+                </button>
+              )
+          }
         </div>
         {
           this.state.showAddReceipt ?
             <AddReceipt
               saveReceipt={this.saveReceipt}
-              cancel={this.toggleAddReceipt} /> :
+              toggleAddReceipt={this.toggleAddReceipt} /> :
             null
         }
         <ReceiptList

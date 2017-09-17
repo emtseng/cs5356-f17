@@ -11,7 +11,8 @@ class ReceiptTags extends Component {
     this.handleAddTag = this.handleAddTag.bind(this)
     this.removeTagInput = this.removeTagInput.bind(this)
   }
-  removeTagInput() {
+  removeTagInput(evt) {
+    evt.preventDefault()
     this.setState({ tagInputs: [] })
   }
   handleAddTag(evt) {
@@ -44,10 +45,10 @@ class ReceiptTags extends Component {
           ))
         }
         <div
-          className="btn-add-tag"
+          className="add-tag action-btn"
           onClick={this.handleAddTag}
         >
-          Add Tag
+          <i className="fa fa-tag" aria-hidden="true" />&nbsp;Add Tag
         </div>
       </div>
     )
