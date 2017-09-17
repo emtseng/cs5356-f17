@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box
+}
+
 #app {
   display: flex;
   flex-direction: column;
@@ -19,19 +23,30 @@
   #receipt-entry {
     display: inline-flex;
     flex-direction: column;
+    margin-bottom: 1.5em;
     #merchant {
       display: block;
-      width: 100%
+      width: 100%;
+      margin-bottom: 1em;
     }
     #amount {
       display: block;
-      width: 100%
+      width: 100%;
+      margin-bottom: 1em;
     }
     #receipt-btns {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: center
+    }
+  }
+  #receiptList {
+    text-align: center;
+    .receipt {
+      td {
+        padding: 0 1em
+      }
     }
   }
 }

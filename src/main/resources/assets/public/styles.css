@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box; }
+
 #app {
   display: flex;
   flex-direction: column;
@@ -14,5 +17,26 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center; }
+  #main #receipt-entry {
+    display: inline-flex;
+    flex-direction: column;
+    margin-bottom: 1.5em; }
+    #main #receipt-entry #merchant {
+      display: block;
+      width: 100%;
+      margin-bottom: 1em; }
+    #main #receipt-entry #amount {
+      display: block;
+      width: 100%;
+      margin-bottom: 1em; }
+    #main #receipt-entry #receipt-btns {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center; }
+  #main #receiptList {
+    text-align: center; }
+    #main #receiptList .receipt td {
+      padding: 0 1em; }
 
 /*# sourceMappingURL=styles.css.map*/

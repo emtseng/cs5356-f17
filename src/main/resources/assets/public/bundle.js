@@ -23218,7 +23218,7 @@ var App = function (_Component) {
         ),
         this.state.showAddReceipt ? _react2.default.createElement(_AddReceipt2.default, {
           saveReceipt: this.saveReceipt,
-          cancel: this.toggleAddReceipt }) : null,
+          toggleAddReceipt: this.toggleAddReceipt }) : null,
         _react2.default.createElement(_ReceiptList2.default, {
           receipts: this.state.receipts,
           toggleTag: this.toggleTag
@@ -24179,7 +24179,11 @@ var AddReceipt = function (_Component) {
             type: 'text',
             value: this.state.amount,
             onChange: this.handleFormEntry
-          }),
+          })
+        ),
+        _react2.default.createElement(
+          'div',
+          { id: 'receipt-btns' },
           _react2.default.createElement(
             'button',
             {

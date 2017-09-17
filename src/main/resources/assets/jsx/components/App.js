@@ -64,7 +64,7 @@ class App extends Component {
           this.state.showAddReceipt ?
             <AddReceipt
               saveReceipt={this.saveReceipt}
-              cancel={this.toggleAddReceipt} /> :
+              toggleAddReceipt={this.toggleAddReceipt} /> :
             null
         }
         <ReceiptList
