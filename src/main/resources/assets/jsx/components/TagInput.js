@@ -4,7 +4,7 @@ class TagInput extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: 'New tag'
+      value: ''
     }
     this.handleKeyChange = this.handleKeyChange.bind(this)
     this.handleTagSubmit = this.handleTagSubmit.bind(this)
@@ -25,6 +25,7 @@ class TagInput extends Component {
       <div className="tag-input-wrapper">
         <input
           className="tag_input"
+          placeholder="New tag"
           value={this.state.value}
           onKeyPress={evt => {
             if (evt.key === 'Enter') {
