@@ -1,5 +1,10 @@
+# Receipt Tracker
+
 [![CircleCI](https://circleci.com/gh/emtseng/cs5356-f17.svg?style=svg)](https://circleci.com/gh/emtseng/cs5356-f17)
 
+Production: [v.2.0](http://ec2-54-82-243-98.compute-1.amazonaws.com)
+
+A simple app for recording and tracking receipts. Java-based backend and API, React frontend.
 
 This project is built on Adam Fleming's [skeleton](https://github.com/amfleming/skeleton.git), a super simple foundation for building a scalable, RESTful HTTP server.
 
