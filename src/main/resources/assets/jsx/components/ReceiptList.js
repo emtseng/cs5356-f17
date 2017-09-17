@@ -1,9 +1,3 @@
-/*
-
-Webpack on Linux has trouble with specifically this import. Why?
-
-*/
-
 import React, { Component } from 'react'
 
 import ReceiptTags from './ReceiptTags.js'
