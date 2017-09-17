@@ -16,3 +16,5 @@ This project is built on Adam Fleming's [skeleton](https://github.com/amfleming/
 1. Run `docker images` to find the tag for your AWS cluster. It'll be something along the lines of `YOUR_ACCOUNT_ID.dkr.ecr.YOUR_REGION.amazonaws.com/YOUR_APP_NAME`
 2. Re-build an image tagged for your AWS cluster: `docker build -t YOUR_AWS_TAG .`
 3. Push the image: `docker push YOUR_AWS_TAG`
+
+You may need to log into AWS again. If prompted, enter ```aws ecr get-login --no-include-email``` for Docker 17.06+.
