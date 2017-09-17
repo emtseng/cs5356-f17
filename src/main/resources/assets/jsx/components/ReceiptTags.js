@@ -45,7 +45,7 @@ class ReceiptTags extends Component {
           ))
         }
         <div
-          className="action-btn"
+          className="add-tag action-btn"
           onClick={this.handleAddTag}
         >
           <i className="fa fa-tag" aria-hidden="true" />&nbsp;Add Tag

@@ -24435,7 +24435,7 @@ var ReceiptTags = function (_Component) {
         _react2.default.createElement(
           'div',
           {
-            className: 'action-btn',
+            className: 'add-tag action-btn',
             onClick: this.handleAddTag
           },
           _react2.default.createElement('i', { className: 'fa fa-tag', 'aria-hidden': 'true' }),
