@@ -1,4 +1,18 @@
+#app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+
 #main {
-  background-color: red; }
+  max-width: 90vw;
+  display: inline-flex;
+  flex-direction: column; }
+  #main #head {
+    width: 100%;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center; }
 
 /*# sourceMappingURL=styles.css.map*/

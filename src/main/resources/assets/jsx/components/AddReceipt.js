@@ -25,7 +25,7 @@ class AddReceipt extends Component {
             type="text"
             value={this.state.merchant}
             onChange={this.handleFormEntry}
-            >
+          >
           </input>
           <input
             id="amount"
@@ -33,8 +33,10 @@ class AddReceipt extends Component {
             type="text"
             value={this.state.amount}
             onChange={this.handleFormEntry}
-            >
+          >
           </input>
+        </form>
+        <div id="receipt-btns">
           <button
             id="cancel-receipt"
             onClick={evt => this.props.toggleAddReceipt(evt)}
@@ -47,7 +49,7 @@ class AddReceipt extends Component {
           >
             Save
           </button>
-        </form>
+        </div>
       </div>
     )
   }

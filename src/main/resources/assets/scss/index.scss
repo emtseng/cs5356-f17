@@ -1,3 +1,37 @@
+#app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 #main {
-  background-color: red
+  max-width: 90vw;
+  display: inline-flex;
+  flex-direction: column;
+  #head {
+    width: 100%;
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center
+  }
+  #receipt-entry {
+    display: inline-flex;
+    flex-direction: column;
+    #merchant {
+      display: block;
+      width: 100%
+    }
+    #amount {
+      display: block;
+      width: 100%
+    }
+    #receipt-btns {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center
+    }
+  }
 }
