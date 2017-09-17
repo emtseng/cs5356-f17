@@ -1,5 +1,6 @@
 * {
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  font-family: 'Roboto Mono', monospace; }
 
 #app {
   display: flex;
@@ -38,5 +39,20 @@
     text-align: center; }
     #main #receiptList .receipt td {
       padding: 0 1em; }
+    #main #receiptList .receipt .receipt-tags {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center; }
+      #main #receiptList .receipt .receipt-tags .tag_input {
+        margin: 1em 0;
+        width: 60%; }
+      #main #receiptList .receipt .receipt-tags .btn-add-tag {
+        width: 60%;
+        background-color: mediumaquamarine;
+        color: white;
+        border-radius: 15px;
+        padding: 5px;
+        font-size: 0.8em; }
 
 /*# sourceMappingURL=styles.css.map*/

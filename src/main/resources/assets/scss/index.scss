@@ -1,5 +1,9 @@
+$add-bg-color: mediumaquamarine;
+$add-font-color: white;
+
 * {
-  box-sizing: border-box
+  box-sizing: border-box;
+  font-family: 'Roboto Mono', monospace;
 }
 
 #app {
@@ -46,6 +50,40 @@
     .receipt {
       td {
         padding: 0 1em
+      }
+      .time {
+        width: 30%
+      }
+      .merchant {
+        width: 30%
+      }
+      .amount {
+        width: 10%
+      }
+      .tags {
+        width: 30%;
+        .receipt-tags {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          align-items: center;
+          .tag_input {
+            margin: 1em 0;
+            width: 60%
+          }
+          .tagValue {
+            margin: 0.5em;
+          }
+          .btn-add-tag {
+            width: 60%;
+            background-color: $add-bg-color;
+            color: $add-font-color;
+            border-radius: 15px;
+            padding: 5px;
+            margin: 0.5em;
+            font-size: 0.8em
+          }
+        }
       }
     }
   }
