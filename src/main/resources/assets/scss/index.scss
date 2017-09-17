@@ -6,6 +6,12 @@ $add-font-color: white;
   font-family: 'Roboto Mono', monospace;
 }
 
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
 #app {
   display: flex;
   flex-direction: column;
@@ -13,7 +19,19 @@ $add-font-color: white;
   align-items: center;
 }
 
+.action-btn {
+  width: 60%;
+  background-color: $add-bg-color;
+  color: $add-font-color;
+  border-radius: 15px;
+  border: none;
+  padding: 5px;
+  margin: 0.5em;
+  font-size: 0.8em
+}
+
 #main {
+  min-width: 60vw;
   max-width: 90vw;
   display: inline-flex;
   flex-direction: column;
@@ -22,69 +40,44 @@ $add-font-color: white;
     display: inline-flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center
+    align-items: center;
+    h1 {
+      margin-right: 1em;
+    }
+    #add-receipt {
+      width: 30%
+    }
   }
   #receipt-entry {
     display: inline-flex;
     flex-direction: column;
     margin-bottom: 1.5em;
-    #merchant {
+    #merchant, #amount {
       display: block;
       width: 100%;
       margin-bottom: 1em;
-    }
-    #amount {
-      display: block;
-      width: 100%;
-      margin-bottom: 1em;
+      border: none;
+      border-bottom: solid 0.5px;
+      font-size: 1em;
     }
     #receipt-btns {
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      align-items: center
-    }
-  }
-  #receiptList {
-    text-align: center;
-    .receipt {
-      td {
-        padding: 0 1em
-      }
-      .time {
+      align-items: center;
+      #save-receipt {
+        @extend .action-btn;
         width: 30%
       }
-      .merchant {
-        width: 30%
-      }
-      .amount {
-        width: 10%
-      }
-      .tags {
+      #cancel-receipt {
+        @extend .action-btn;
         width: 30%;
-        .receipt-tags {
-          display: flex;
-          flex-direction: column;
-          justify-content: space-around;
-          align-items: center;
-          .tag_input {
-            margin: 1em 0;
-            width: 60%
-          }
-          .tagValue {
-            margin: 0.5em;
-          }
-          .btn-add-tag {
-            width: 60%;
-            background-color: $add-bg-color;
-            color: $add-font-color;
-            border-radius: 15px;
-            padding: 5px;
-            margin: 0.5em;
-            font-size: 0.8em
-          }
-        }
+        background-color: white;
+        color: black;
       }
     }
   }
 }
+
+@import 'receiptList';
+@import 'tags';

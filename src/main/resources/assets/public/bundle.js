@@ -23205,15 +23205,28 @@ var App = function (_Component) {
             null,
             'My Receipts'
           ),
-          _react2.default.createElement(
+          this.state.showAddReceipt ? _react2.default.createElement(
             'button',
             {
               onClick: function onClick(evt) {
                 return _this5.toggleAddReceipt(evt);
               },
-              id: 'add-receipt'
+              id: 'add-receipt',
+              className: 'action-btn'
             },
-            _react2.default.createElement('i', { className: 'fa fa-plus', 'aria-hidden': 'true' })
+            _react2.default.createElement('i', { className: 'fa fa-caret-up', 'aria-hidden': 'true' }),
+            '\xA0Collapse'
+          ) : _react2.default.createElement(
+            'button',
+            {
+              onClick: function onClick(evt) {
+                return _this5.toggleAddReceipt(evt);
+              },
+              id: 'add-receipt',
+              className: 'action-btn'
+            },
+            _react2.default.createElement('i', { className: 'fa fa-plus', 'aria-hidden': 'true' }),
+            '\xA0Add Receipt'
           )
         ),
         this.state.showAddReceipt ? _react2.default.createElement(_AddReceipt2.default, {
@@ -24142,8 +24155,8 @@ var AddReceipt = function (_Component) {
     var _this = _possibleConstructorReturn(this, (AddReceipt.__proto__ || Object.getPrototypeOf(AddReceipt)).call(this, props));
 
     _this.state = {
-      merchant: 'Merchant',
-      amount: 'Amount'
+      merchant: '',
+      amount: ''
     };
     _this.handleFormEntry = _this.handleFormEntry.bind(_this);
     return _this;
@@ -24170,6 +24183,7 @@ var AddReceipt = function (_Component) {
             id: 'merchant',
             name: 'merchant',
             type: 'text',
+            placeholder: 'Merchant',
             value: this.state.merchant,
             onChange: this.handleFormEntry
           }),
@@ -24177,6 +24191,7 @@ var AddReceipt = function (_Component) {
             id: 'amount',
             name: 'amount',
             type: 'text',
+            placeholder: 'Amount',
             value: this.state.amount,
             onChange: this.handleFormEntry
           })
@@ -24192,17 +24207,20 @@ var AddReceipt = function (_Component) {
                 return _this2.props.toggleAddReceipt(evt);
               }
             },
-            'Cancel'
+            _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true' }),
+            '\xA0Cancel'
           ),
           _react2.default.createElement(
             'button',
             {
               id: 'save-receipt',
+              className: 'action-btn',
               onClick: function onClick(evt) {
                 return _this2.props.saveReceipt(evt, _this2.state.merchant, _this2.state.amount);
               }
             },
-            'Save'
+            _react2.default.createElement('i', { className: 'fa fa-floppy-o', 'aria-hidden': 'true' }),
+            '\xA0Save'
           )
         )
       );
@@ -24258,57 +24276,57 @@ var ReceiptList = function (_Component) {
       var _this2 = this;
 
       return _react2.default.createElement(
-        'table',
-        { id: 'receiptList' },
+        'div',
+        { id: 'receiptList-wrapper' },
         _react2.default.createElement(
-          'tbody',
-          null,
+          'div',
+          { id: 'receiptList-header' },
           _react2.default.createElement(
-            'tr',
-            null,
-            _react2.default.createElement(
-              'th',
-              null,
-              'Time'
-            ),
-            _react2.default.createElement(
-              'th',
-              null,
-              'Merchant'
-            ),
-            _react2.default.createElement(
-              'th',
-              null,
-              'Amount'
-            ),
-            _react2.default.createElement(
-              'th',
-              null,
-              'Tags'
-            )
+            'div',
+            { className: 'col-time' },
+            'Time'
           ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-merchant' },
+            'Merchant'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-amt' },
+            'Amount'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'col-tags' },
+            'Tags'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { id: 'receiptList' },
           this.props.receipts && this.props.receipts.map(function (receipt) {
             return _react2.default.createElement(
-              'tr',
-              { key: receipt.id, className: 'receipt', id: 'receipt-row-' + receipt.id },
+              'div',
+              { key: receipt.id, className: 'receipt receiptList-row', id: 'receipt-row-' + receipt.id },
               _react2.default.createElement(
-                'td',
-                { className: 'time' },
+                'div',
+                { className: 'time col-time' },
                 receipt.created
               ),
               _react2.default.createElement(
-                'td',
-                { className: 'merchant' },
+                'div',
+                { className: 'merchant col-merchant' },
                 receipt.merchantName
               ),
               _react2.default.createElement(
-                'td',
-                { className: 'amount' },
+                'div',
+                { className: 'amount col-amt' },
                 receipt.value
               ),
               _react2.default.createElement(
-                'td',
-                { className: 'tags' },
+                'div',
+                { className: 'tags col-tags' },
                 _react2.default.createElement(_ReceiptTags2.default, {
                   tags: receipt.tags,
                   receiptId: receipt.id,
@@ -24374,7 +24392,8 @@ var ReceiptTags = function (_Component) {
 
   _createClass(ReceiptTags, [{
     key: 'removeTagInput',
-    value: function removeTagInput() {
+    value: function removeTagInput(evt) {
+      evt.preventDefault();
       this.setState({ tagInputs: [] });
     }
   }, {
@@ -24416,10 +24435,11 @@ var ReceiptTags = function (_Component) {
         _react2.default.createElement(
           'div',
           {
-            className: 'btn-add-tag',
+            className: 'action-btn',
             onClick: this.handleAddTag
           },
-          'Add Tag'
+          _react2.default.createElement('i', { className: 'fa fa-tag', 'aria-hidden': 'true' }),
+          '\xA0Add Tag'
         )
       );
     }
@@ -24484,23 +24504,35 @@ var TagInput = function (_Component) {
     value: function handleTagSubmit(evt) {
       evt.preventDefault();
       this.props.toggleTag(evt, this.state.value, this.props.receiptId);
-      this.props.removeTagInput();
+      this.props.removeTagInput(evt);
     }
   }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
 
-      return _react2.default.createElement('input', {
-        className: 'tag_input',
-        value: this.state.value,
-        onKeyPress: function onKeyPress(evt) {
-          if (evt.key === 'Enter') {
-            _this2.handleTagSubmit(evt);
-          }
-        },
-        onChange: this.handleKeyChange
-      });
+      return _react2.default.createElement(
+        'div',
+        { className: 'tag-input-wrapper' },
+        _react2.default.createElement('input', {
+          className: 'tag_input',
+          value: this.state.value,
+          onKeyPress: function onKeyPress(evt) {
+            if (evt.key === 'Enter') {
+              _this2.handleTagSubmit(evt);
+            }
+          },
+          onChange: this.handleKeyChange
+        }),
+        _react2.default.createElement(
+          'div',
+          {
+            className: 'tag_cancel',
+            onClick: this.props.removeTagInput
+          },
+          _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true' })
+        )
+      );
     }
   }]);
 
