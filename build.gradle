@@ -59,6 +59,8 @@ dependencies {
     compile 'io.dropwizard:dropwizard-db:1.2.0-rc2'     // Provides manages data sources
     compile 'io.dropwizard:dropwizard-assets:1.2.0-rc2' // Provides asset service
 
+    compile 'com.google.cloud:google-cloud-vision:0.24.0-beta'  // for Google Vision API
+
     compile 'org.jooq:jooq:3.9.5'                       // DSL for SQL in java
     compile 'com.h2database:h2:1.4.196'                 // in-memory SQL. we'll upgrade to mysql later
 
