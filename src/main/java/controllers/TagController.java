@@ -44,5 +44,4 @@ public class TagController {
                 receipts.getAllTagsForReceipt(receipt.getId())))
             .collect(toList());
     }
-
 }

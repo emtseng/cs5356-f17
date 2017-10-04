@@ -1,5 +1,4 @@
 import controllers.HelloWorldController;
-import controllers.StaticHtmlController;
 import controllers.ReceiptController;
 import controllers.TagController;
 
