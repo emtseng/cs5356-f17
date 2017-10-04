@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import $ from 'jquery'
 
 import AddReceipt from './AddReceipt.js'
 import ReceiptList from './ReceiptList.js'
