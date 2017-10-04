@@ -9,7 +9,8 @@ class App extends Component {
     super(props)
     this.state = {
       receipts: [],
-      showAddReceipt: false
+      showAddReceipt: false,
+      showCamera: false
     }
     this.getReceipts = this.getReceipts.bind(this)
     this.toggleAddReceipt = this.toggleAddReceipt.bind(this)
@@ -28,6 +29,13 @@ class App extends Component {
     evt.stopPropagation()
     this.setState({
       showAddReceipt: !this.state.showAddReceipt
+    })
+  }
+  toggleShowCamera(evt) {
+    evt.preventDefault()
+    evt.stopPropagation()
+    this.setState({
+      showCamera: !this.state.showCamera
     })
   }
   saveReceipt(evt, merchant, amount) {
@@ -70,6 +78,27 @@ class App extends Component {
                   className="action-btn"
                 >
                   <i className="fa fa-plus" aria-hidden="true" />&nbsp;Add Receipt
+                </button>
+              )
+          }
+          {
+            this.state.showCamera ?
+              (
+                <button
+                  onClick={evt => this.toggleShowCamera(evt)}
+                  id="start-camera"
+                  className="action-btn"
+                >
+                  <i className="fa fa-caret-up" aria-hidden="true" />&nbsp;Collapse
+              </button>
+              ) :
+              (
+                <button
+                  onClick={evt => this.toggleShowCamera(evt)}
+                  id="start-camera"
+                  className="action-btn"
+                >
+                  <i className="fa fa-camera" aria-hidden="true" />&nbsp;Show Camera
                 </button>
               )
           }
