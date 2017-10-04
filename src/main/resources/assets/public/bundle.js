@@ -23136,8 +23136,7 @@ var App = function (_Component) {
       receipts: [],
       showAddReceipt: false,
       showCamera: false,
-      imageCapture: '',
-      track: ''
+      imageCapture: ''
     };
     _this.getReceipts = _this.getReceipts.bind(_this);
     _this.toggleAddReceipt = _this.toggleAddReceipt.bind(_this);
@@ -23145,8 +23144,8 @@ var App = function (_Component) {
     _this.toggleTag = _this.toggleTag.bind(_this);
 
     _this.toggleShowCamera = _this.toggleShowCamera.bind(_this);
-    _this.initVideoStream = _this.initVideoStream.bind(_this);
-    _this.stopVideo = _this.stopVideo.bind(_this);
+    _this.attachMediaStream = _this.attachMediaStream.bind(_this);
+    _this.takeSnapshot = _this.takeSnapshot.bind(_this);
     return _this;
   }
 
@@ -23174,55 +23173,78 @@ var App = function (_Component) {
       });
     }
   }, {
-    key: 'initVideoStream',
-    value: function initVideoStream() {
-      var imageCapture = void 0;
-      var track = void 0;
-      function attachMediaStream(mediaStream) {
-        (0, _jquery2.default)('video')[0].srcObject = mediaStream;
-        // Saving the track allows us to capture a photo
-        track = mediaStream.getVideoTracks()[0];
-        imageCapture = new ImageCapture(track);
-      }
-      navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } }).then(attachMediaStream).catch(function (error) {
-        navigator.mediaDevices.getUserMedia({ video: true }).then(attachMediaStream).catch(function (error) {
-          console.log('you are fooked');
-        });
-      });
+    key: 'attachMediaStream',
+    value: function attachMediaStream(mediaStream) {
+      (0, _jquery2.default)('video')[0].srcObject = mediaStream;
+      // Saving the track allows us to capture a photo
+      var track = mediaStream.getVideoTracks()[0];
+      var imageCapture = new ImageCapture(track);
       this.setState({
-        imageCapture: imageCapture, track: track
-      });
-    }
-  }, {
-    key: 'stopVideo',
-    value: function stopVideo() {
-      (0, _jquery2.default)('video')[0].pause();
-      this.setState({
-        imageCapture: '',
-        track: ''
+        imageCapture: imageCapture
       });
     }
   }, {
     key: 'toggleShowCamera',
     value: function toggleShowCamera(evt) {
+      var _this3 = this;
+
       evt.preventDefault();
       evt.stopPropagation();
-      this.state.showCamera ? this.stopVideo() : this.initVideoStream();
-      this.setState({
-        showCamera: !this.state.showCamera
+      if (this.state.showCamera) {
+        (0, _jquery2.default)('video')[0].pause();
+        this.setState({
+          showCamera: false,
+          imageCapture: ''
+        });
+      } else {
+        this.setState({
+          showCamera: true
+        });
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } }).then(this.attachMediaStream).catch(function (error) {
+          navigator.mediaDevices.getUserMedia({ video: true }).then(_this3.attachMediaStream).catch(function (error) {
+            console.log('you are fooked');
+          });
+        });
+      }
+    }
+  }, {
+    key: 'takeSnapshot',
+    value: function takeSnapshot(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
+      // create a CANVAS element that is same size as the image
+      this.state.imageCapture.grabFrame().then(function (img) {
+        var canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        canvas.getContext('2d').drawImage(img, 0, 0);
+        // const base64EncodedImageData = canvas.toDataURL('image/png').split(',')[1];
+        // $.ajax({
+        //   url: "/images",
+        //   type: "POST",
+        //   data: base64EncodedImageData,
+        //   contentType: "text/plain",
+        //   success: function () { },
+        // })
+        //   .then(response => {
+        //     $('video').after(`<div>got response: <pre>${JSON.stringify(response)}</pre></div>`);
+        //   })
+        //   .always(() => console.log('request complete'));
+        // For debugging, you can uncomment this to see the frame that was captured
+        (0, _jquery2.default)('BODY').append(canvas);
       });
     }
   }, {
     key: 'saveReceipt',
     value: function saveReceipt(evt, merchant, amount) {
-      var _this3 = this;
+      var _this4 = this;
 
       evt.preventDefault();
       evt.stopPropagation();
       _axios2.default.post('/api/receipts', { merchant: merchant, amount: amount }).then(function (res) {
-        return _this3.getReceipts();
+        return _this4.getReceipts();
       }).then(function () {
-        return _this3.setState({ showAddReceipt: false });
+        return _this4.setState({ showAddReceipt: false });
       }).catch(function (err) {
         return console.error(err);
       });
@@ -23230,7 +23252,7 @@ var App = function (_Component) {
   }, {
     key: 'toggleTag',
     value: function toggleTag(evt, tag, receiptId) {
-      var _this4 = this;
+      var _this5 = this;
 
       evt.preventDefault();
       _axios2.default.put('/api/tags/' + tag, JSON.stringify(receiptId), {
@@ -23238,7 +23260,7 @@ var App = function (_Component) {
           'Content-Type': 'application/json'
         }
       }).then(function (res) {
-        return _this4.getReceipts();
+        return _this5.getReceipts();
       }).catch(function (err) {
         return console.error(err);
       });
@@ -23246,7 +23268,7 @@ var App = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this5 = this;
+      var _this6 = this;
 
       return _react2.default.createElement(
         'div',
@@ -23263,7 +23285,7 @@ var App = function (_Component) {
             'button',
             {
               onClick: function onClick(evt) {
-                return _this5.toggleAddReceipt(evt);
+                return _this6.toggleAddReceipt(evt);
               },
               id: 'add-receipt',
               className: 'action-btn'
@@ -23274,7 +23296,7 @@ var App = function (_Component) {
             'button',
             {
               onClick: function onClick(evt) {
-                return _this5.toggleAddReceipt(evt);
+                return _this6.toggleAddReceipt(evt);
               },
               id: 'add-receipt',
               className: 'action-btn'
@@ -23286,7 +23308,7 @@ var App = function (_Component) {
             'button',
             {
               onClick: function onClick(evt) {
-                return _this5.toggleShowCamera(evt);
+                return _this6.toggleShowCamera(evt);
               },
               id: 'start-camera',
               className: 'action-btn'
@@ -23297,7 +23319,7 @@ var App = function (_Component) {
             'button',
             {
               onClick: function onClick(evt) {
-                return _this5.toggleShowCamera(evt);
+                return _this6.toggleShowCamera(evt);
               },
               id: 'start-camera',
               className: 'action-btn'
@@ -23310,10 +23332,8 @@ var App = function (_Component) {
           saveReceipt: this.saveReceipt,
           toggleAddReceipt: this.toggleAddReceipt }) : null,
         this.state.showCamera ? _react2.default.createElement(_SnapReceipt2.default, {
-          saveReceiptImg: this.saveReceiptImg,
-          toggleShowCamera: this.toggleShowCamera,
-          imageCapture: this.state.imageCapture,
-          track: this.state.track }) : null,
+          takeSnapshot: this.takeSnapshot,
+          toggleShowCamera: this.toggleShowCamera }) : null,
         _react2.default.createElement(_ReceiptList2.default, {
           receipts: this.state.receipts,
           toggleTag: this.toggleTag
@@ -34925,36 +34945,10 @@ var SnapReceipt = function (_Component) {
       merchant: '',
       amount: ''
     };
-    _this.takeSnapshot = _this.takeSnapshot.bind(_this);
     return _this;
   }
 
   _createClass(SnapReceipt, [{
-    key: 'takeSnapshot',
-    value: function takeSnapshot() {
-      // create a CANVAS element that is same size as the image
-      this.props.imageCapture.grabFrame().then(function (img) {
-        var canvas = document.createElement('canvas');
-        canvas.width = img.width;
-        canvas.height = img.height;
-        canvas.getContext('2d').drawImage(img, 0, 0);
-        // const base64EncodedImageData = canvas.toDataURL('image/png').split(',')[1];
-        // $.ajax({
-        //   url: "/images",
-        //   type: "POST",
-        //   data: base64EncodedImageData,
-        //   contentType: "text/plain",
-        //   success: function () { },
-        // })
-        //   .then(response => {
-        //     $('video').after(`<div>got response: <pre>${JSON.stringify(response)}</pre></div>`);
-        //   })
-        //   .always(() => console.log('request complete'));
-        // For debugging, you can uncomment this to see the frame that was captured
-        (0, _jquery2.default)('BODY').append(canvas);
-      });
-    }
-  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
@@ -34987,11 +34981,11 @@ var SnapReceipt = function (_Component) {
               id: 'take-pic',
               className: 'action-btn',
               onClick: function onClick(evt) {
-                return _this2.props.saveReceiptImg(evt, _this2.state.merchant, _this2.state.amount);
+                return _this2.props.takeSnapshot(evt);
               }
             },
             _react2.default.createElement('i', { className: 'fa fa-floppy-o', 'aria-hidden': 'true' }),
-            '\xA0Save'
+            '\xA0Snap'
           )
         )
       );
