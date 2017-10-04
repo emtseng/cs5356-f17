@@ -12,12 +12,18 @@ class App extends Component {
     this.state = {
       receipts: [],
       showAddReceipt: false,
-      showCamera: false
+      showCamera: false,
+      imageCapture: '',
+      track: ''
     }
     this.getReceipts = this.getReceipts.bind(this)
     this.toggleAddReceipt = this.toggleAddReceipt.bind(this)
     this.saveReceipt = this.saveReceipt.bind(this)
     this.toggleTag = this.toggleTag.bind(this)
+
+    this.toggleShowCamera = this.toggleShowCamera.bind(this)
+    this.initVideoStream = this.initVideoStream.bind(this)
+    this.stopVideo = this.stopVideo.bind(this)
   }
   componentDidMount() {
     this.getReceipts()
@@ -33,9 +39,7 @@ class App extends Component {
       showAddReceipt: !this.state.showAddReceipt
     })
   }
-  toggleShowCamera(evt) {
-    evt.preventDefault()
-    evt.stopPropagation()
+  initVideoStream() {
     let imageCapture;
     let track;
     function attachMediaStream(mediaStream) {
@@ -53,6 +57,21 @@ class App extends Component {
             console.log('you are fooked');
           })
       })
+    this.setState({
+      imageCapture, track
+    })
+  }
+  stopVideo() {
+    $('video')[0].pause();
+    this.setState({
+      imageCapture: '',
+      track: ''
+    })
+  }
+  toggleShowCamera(evt) {
+    evt.preventDefault()
+    evt.stopPropagation()
+    this.state.showCamera ? this.stopVideo() : this.initVideoStream()
     this.setState({
       showCamera: !this.state.showCamera
     })
@@ -131,7 +150,11 @@ class App extends Component {
         }
         {
           this.state.showCamera ?
-            <SnapReceipt /> :
+            <SnapReceipt
+              saveReceiptImg={this.saveReceiptImg}
+              toggleShowCamera={this.toggleShowCamera}
+              imageCapture={this.state.imageCapture}
+              track={this.state.track}  /> :
             null
         }
         <ReceiptList

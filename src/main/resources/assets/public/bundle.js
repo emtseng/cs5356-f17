@@ -23135,12 +23135,18 @@ var App = function (_Component) {
     _this.state = {
       receipts: [],
       showAddReceipt: false,
-      showCamera: false
+      showCamera: false,
+      imageCapture: '',
+      track: ''
     };
     _this.getReceipts = _this.getReceipts.bind(_this);
     _this.toggleAddReceipt = _this.toggleAddReceipt.bind(_this);
     _this.saveReceipt = _this.saveReceipt.bind(_this);
     _this.toggleTag = _this.toggleTag.bind(_this);
+
+    _this.toggleShowCamera = _this.toggleShowCamera.bind(_this);
+    _this.initVideoStream = _this.initVideoStream.bind(_this);
+    _this.stopVideo = _this.stopVideo.bind(_this);
     return _this;
   }
 
@@ -23168,10 +23174,8 @@ var App = function (_Component) {
       });
     }
   }, {
-    key: 'toggleShowCamera',
-    value: function toggleShowCamera(evt) {
-      evt.preventDefault();
-      evt.stopPropagation();
+    key: 'initVideoStream',
+    value: function initVideoStream() {
       var imageCapture = void 0;
       var track = void 0;
       function attachMediaStream(mediaStream) {
@@ -23185,6 +23189,25 @@ var App = function (_Component) {
           console.log('you are fooked');
         });
       });
+      this.setState({
+        imageCapture: imageCapture, track: track
+      });
+    }
+  }, {
+    key: 'stopVideo',
+    value: function stopVideo() {
+      (0, _jquery2.default)('video')[0].pause();
+      this.setState({
+        imageCapture: '',
+        track: ''
+      });
+    }
+  }, {
+    key: 'toggleShowCamera',
+    value: function toggleShowCamera(evt) {
+      evt.preventDefault();
+      evt.stopPropagation();
+      this.state.showCamera ? this.stopVideo() : this.initVideoStream();
       this.setState({
         showCamera: !this.state.showCamera
       });
@@ -23286,7 +23309,11 @@ var App = function (_Component) {
         this.state.showAddReceipt ? _react2.default.createElement(_AddReceipt2.default, {
           saveReceipt: this.saveReceipt,
           toggleAddReceipt: this.toggleAddReceipt }) : null,
-        this.state.showCamera ? _react2.default.createElement(_SnapReceipt2.default, null) : null,
+        this.state.showCamera ? _react2.default.createElement(_SnapReceipt2.default, {
+          saveReceiptImg: this.saveReceiptImg,
+          toggleShowCamera: this.toggleShowCamera,
+          imageCapture: this.state.imageCapture,
+          track: this.state.track }) : null,
         _react2.default.createElement(_ReceiptList2.default, {
           receipts: this.state.receipts,
           toggleTag: this.toggleTag
@@ -34874,6 +34901,10 @@ var _react = __webpack_require__(15);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _jquery = __webpack_require__(212);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -34894,12 +34925,40 @@ var SnapReceipt = function (_Component) {
       merchant: '',
       amount: ''
     };
+    _this.takeSnapshot = _this.takeSnapshot.bind(_this);
     return _this;
   }
 
   _createClass(SnapReceipt, [{
+    key: 'takeSnapshot',
+    value: function takeSnapshot() {
+      // create a CANVAS element that is same size as the image
+      this.props.imageCapture.grabFrame().then(function (img) {
+        var canvas = document.createElement('canvas');
+        canvas.width = img.width;
+        canvas.height = img.height;
+        canvas.getContext('2d').drawImage(img, 0, 0);
+        // const base64EncodedImageData = canvas.toDataURL('image/png').split(',')[1];
+        // $.ajax({
+        //   url: "/images",
+        //   type: "POST",
+        //   data: base64EncodedImageData,
+        //   contentType: "text/plain",
+        //   success: function () { },
+        // })
+        //   .then(response => {
+        //     $('video').after(`<div>got response: <pre>${JSON.stringify(response)}</pre></div>`);
+        //   })
+        //   .always(() => console.log('request complete'));
+        // For debugging, you can uncomment this to see the frame that was captured
+        (0, _jquery2.default)('BODY').append(canvas);
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2.default.createElement(
         'div',
         { id: 'receipt-snap' },
@@ -34907,6 +34966,33 @@ var SnapReceipt = function (_Component) {
           'div',
           { id: 'vidwrap' },
           _react2.default.createElement('video', { autoPlay: true })
+        ),
+        _react2.default.createElement(
+          'div',
+          { id: 'receipt-btns' },
+          _react2.default.createElement(
+            'button',
+            {
+              id: 'take-pic-cancel',
+              onClick: function onClick(evt) {
+                return _this2.props.toggleShowCamera(evt);
+              }
+            },
+            _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true' }),
+            '\xA0Cancel'
+          ),
+          _react2.default.createElement(
+            'button',
+            {
+              id: 'take-pic',
+              className: 'action-btn',
+              onClick: function onClick(evt) {
+                return _this2.props.saveReceiptImg(evt, _this2.state.merchant, _this2.state.amount);
+              }
+            },
+            _react2.default.createElement('i', { className: 'fa fa-floppy-o', 'aria-hidden': 'true' }),
+            '\xA0Save'
+          )
         )
       );
     }
