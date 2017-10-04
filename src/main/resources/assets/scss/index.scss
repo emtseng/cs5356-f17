@@ -79,5 +79,17 @@ body {
   }
 }
 
+video {
+  width: 550px;
+  height: 450px;
+  border: 1px solid black;
+}
+#vidwrap {
+  margin: 20px 0;
+}
+#start, #snapshot {
+  height: 3em;
+}
+
 @import 'receiptList';
 @import 'tags';
