@@ -3,6 +3,7 @@ import axios from 'axios'
 
 import AddReceipt from './AddReceipt.js'
 import ReceiptList from './ReceiptList.js'
+import SnapReceipt from './SnapReceipt.js'
 
 class App extends Component {
   constructor(props) {
@@ -34,6 +35,23 @@ class App extends Component {
   toggleShowCamera(evt) {
     evt.preventDefault()
     evt.stopPropagation()
+    let imageCapture;
+    let track;
+    function attachMediaStream(mediaStream) {
+      $('video')[0].srcObject = mediaStream;
+      // Saving the track allows us to capture a photo
+      track = mediaStream.getVideoTracks()[0];
+      imageCapture = new ImageCapture(track);
+    }
+    navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" } } })
+      .then(attachMediaStream)
+      .catch(error => {
+        navigator.mediaDevices.getUserMedia({ video: true })
+          .then(attachMediaStream)
+          .catch(error => {
+            console.log('you are fooked');
+          })
+      })
     this.setState({
       showCamera: !this.state.showCamera
     })
@@ -108,6 +126,11 @@ class App extends Component {
             <AddReceipt
               saveReceipt={this.saveReceipt}
               toggleAddReceipt={this.toggleAddReceipt} /> :
+            null
+        }
+        {
+          this.state.showCamera ?
+            <SnapReceipt /> :
             null
         }
         <ReceiptList
