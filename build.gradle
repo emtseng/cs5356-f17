@@ -61,6 +61,8 @@ dependencies {
 
     compile 'com.google.cloud:google-cloud-vision:0.24.0-beta'  // for Google Vision API
 
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.6'
+
     compile 'org.jooq:jooq:3.9.5'                       // DSL for SQL in java
     compile 'com.h2database:h2:1.4.196'                 // in-memory SQL. we'll upgrade to mysql later
 

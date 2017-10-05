@@ -81,7 +81,14 @@ class App extends Component {
         canvas.width = img.width;
         canvas.height = img.height;
         canvas.getContext('2d').drawImage(img, 0, 0);
-        // const base64EncodedImageData = canvas.toDataURL('image/png').split(',')[1];
+        const base64EncodedImageData = canvas.toDataURL('image/png').split(',')[1];
+        axios.post('/api/images', base64EncodedImageData, {
+          headers: {
+            'Content-Type': 'text/plain'
+          }
+        })
+        .then(res => console.log(res.data))
+        .catch(console.error)
         // $.ajax({
         //   url: "/images",
         //   type: "POST",

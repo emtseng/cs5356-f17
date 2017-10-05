@@ -23218,7 +23218,14 @@ var App = function (_Component) {
         canvas.width = img.width;
         canvas.height = img.height;
         canvas.getContext('2d').drawImage(img, 0, 0);
-        // const base64EncodedImageData = canvas.toDataURL('image/png').split(',')[1];
+        var base64EncodedImageData = canvas.toDataURL('image/png').split(',')[1];
+        _axios2.default.post('/api/images', base64EncodedImageData, {
+          headers: {
+            'Content-Type': 'text/plain'
+          }
+        }).then(function (res) {
+          return console.log(res.data);
+        }).catch(console.error);
         // $.ajax({
         //   url: "/images",
         //   type: "POST",
