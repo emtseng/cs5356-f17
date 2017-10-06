@@ -55,7 +55,7 @@ body {
       #main #receipt-entry #vidwrap video, #main #receipt-snap #vidwrap video {
         width: 550px;
         height: 450px;
-        border: 1px solid black; }
+        border: 0.5px solid black; }
     #main #receipt-entry #receipt-btns, #main #receipt-snap #receipt-btns {
       display: flex;
       flex-direction: row;
