@@ -4,8 +4,10 @@ import api.ReceiptSuggestionResponse;
 import com.google.cloud.vision.v1.*;
 import com.google.protobuf.ByteString;
 import java.math.BigDecimal;
-import org.apache.commons.lang3.math.*;
 import java.util.*;
+import java.util.regex.*;
+import java.util.stream.Collectors;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -45,38 +47,27 @@ public class ReceiptImageController {
       BatchAnnotateImagesResponse responses = client.batchAnnotateImages(Collections.singletonList(request));
       AnnotateImageResponse res = responses.getResponses(0);
 
-      String merchantName = null;
-      BigDecimal amount = null;
-
-      // Your Algo Here!!
       // Sort text annotations by bounding polygon.  Top-most non-decimal text is the merchant
       // bottom-most decimal text is the total amount
 
-      Integer bottomY = 1000;
-      Integer topY = 0;
+      String completeText = res.getTextAnnotationsList().get(0).getDescription();
+      out.printf("completeText: %s\n", completeText);
 
-      for (EntityAnnotation annotation : res.getTextAnnotationsList()) {
-        String text = annotation.getDescription();
-        Integer tempBottomY = annotation.getBoundingPoly().getVertices(0).getY();
-        Integer tempTopY = annotation.getBoundingPoly().getVertices(2).getY();
+      List<String> textArr = Arrays.asList(completeText.split("\n"));
+      String merchantName = textArr.get(0);
 
-        if (bottomY > tempBottomY && NumberUtils.isCreatable(text)) {
-          bottomY = tempBottomY;
-          out.printf("new amt: ", annotation.getDescription());
-          amount = new BigDecimal(annotation.getDescription());
-        }
+      List<String> numArr = textArr.stream().filter(x -> x.matches(".*\\d+.*")).collect(Collectors.toList());
+      out.printf("numArr: %s\n", numArr);
+      out.printf("last item in numArr: %s\n", numArr.get(numArr.size() - 1));
 
-        if (topY < tempTopY) {
-          topY = tempTopY;
-          out.printf("new merchant: ", annotation.getDescription());
-          merchantName = annotation.getDescription();
-        }
+      Pattern pattern = Pattern.compile("\\d+\\.\\d+");
+      Matcher matcher = pattern.matcher(numArr.get(numArr.size() - 1));
 
-        out.printf("Position : %s\n", annotation.getBoundingPoly());
-        out.printf("Text: %s\n", annotation.getDescription());
+      BigDecimal amount = null;
+      while (matcher.find()) {
+        amount = new BigDecimal(matcher.group(0));
       }
 
-      //TextAnnotation fullTextAnnotation = res.getFullTextAnnotation();
       return new ReceiptSuggestionResponse(merchantName, amount);
     }
   }

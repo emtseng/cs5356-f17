@@ -14,6 +14,8 @@ class App extends Component {
       showAddReceipt: false,
       showCamera: false,
       imageCapture: '',
+      merchantName: '',
+      amount: ''
     }
     this.getReceipts = this.getReceipts.bind(this)
     this.toggleAddReceipt = this.toggleAddReceipt.bind(this)
@@ -35,7 +37,7 @@ class App extends Component {
     evt.preventDefault()
     evt.stopPropagation()
     this.setState({
-      showAddReceipt: !this.state.showAddReceipt
+      showAddReceipt: !this.state.showAddReceipt,
     })
   }
   attachMediaStream(mediaStream) {
@@ -87,21 +89,17 @@ class App extends Component {
             'Content-Type': 'text/plain'
           }
         })
-        .then(res => console.log(res.data))
-        .catch(console.error)
-        // $.ajax({
-        //   url: "/images",
-        //   type: "POST",
-        //   data: base64EncodedImageData,
-        //   contentType: "text/plain",
-        //   success: function () { },
-        // })
-        //   .then(response => {
-        //     $('video').after(`<div>got response: <pre>${JSON.stringify(response)}</pre></div>`);
-        //   })
-        //   .always(() => console.log('request complete'));
-        // For debugging, you can uncomment this to see the frame that was captured
-        $('BODY').append(canvas);
+          .then(res => {
+            console.log(res.data)
+            this.setState({
+              merchantName: res.data.merchantName,
+              amount: res.data.amount,
+              showAddReceipt: true,
+              showCamera: false
+            })
+          })
+          .catch(console.error)
+        //$('BODY').append(canvas);
       })
   }
   saveReceipt(evt, merchant, amount) {
@@ -173,7 +171,9 @@ class App extends Component {
           this.state.showAddReceipt ?
             <AddReceipt
               saveReceipt={this.saveReceipt}
-              toggleAddReceipt={this.toggleAddReceipt} /> :
+              toggleAddReceipt={this.toggleAddReceipt}
+              merchantName={this.state.merchantName}
+              amount={this.state.amount} /> :
             null
         }
         {

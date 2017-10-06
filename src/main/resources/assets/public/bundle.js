@@ -23136,7 +23136,9 @@ var App = function (_Component) {
       receipts: [],
       showAddReceipt: false,
       showCamera: false,
-      imageCapture: ''
+      imageCapture: '',
+      merchantName: '',
+      amount: ''
     };
     _this.getReceipts = _this.getReceipts.bind(_this);
     _this.toggleAddReceipt = _this.toggleAddReceipt.bind(_this);
@@ -23210,6 +23212,8 @@ var App = function (_Component) {
   }, {
     key: 'takeSnapshot',
     value: function takeSnapshot(evt) {
+      var _this4 = this;
+
       evt.preventDefault();
       evt.stopPropagation();
       // create a CANVAS element that is same size as the image
@@ -23224,34 +23228,28 @@ var App = function (_Component) {
             'Content-Type': 'text/plain'
           }
         }).then(function (res) {
-          return console.log(res.data);
+          console.log(res.data);
+          _this4.setState({
+            merchantName: res.data.merchantName,
+            amount: res.data.amount,
+            showAddReceipt: true,
+            showCamera: false
+          });
         }).catch(console.error);
-        // $.ajax({
-        //   url: "/images",
-        //   type: "POST",
-        //   data: base64EncodedImageData,
-        //   contentType: "text/plain",
-        //   success: function () { },
-        // })
-        //   .then(response => {
-        //     $('video').after(`<div>got response: <pre>${JSON.stringify(response)}</pre></div>`);
-        //   })
-        //   .always(() => console.log('request complete'));
-        // For debugging, you can uncomment this to see the frame that was captured
-        (0, _jquery2.default)('BODY').append(canvas);
+        //$('BODY').append(canvas);
       });
     }
   }, {
     key: 'saveReceipt',
     value: function saveReceipt(evt, merchant, amount) {
-      var _this4 = this;
+      var _this5 = this;
 
       evt.preventDefault();
       evt.stopPropagation();
       _axios2.default.post('/api/receipts', { merchant: merchant, amount: amount }).then(function (res) {
-        return _this4.getReceipts();
+        return _this5.getReceipts();
       }).then(function () {
-        return _this4.setState({ showAddReceipt: false });
+        return _this5.setState({ showAddReceipt: false });
       }).catch(function (err) {
         return console.error(err);
       });
@@ -23259,7 +23257,7 @@ var App = function (_Component) {
   }, {
     key: 'toggleTag',
     value: function toggleTag(evt, tag, receiptId) {
-      var _this5 = this;
+      var _this6 = this;
 
       evt.preventDefault();
       _axios2.default.put('/api/tags/' + tag, JSON.stringify(receiptId), {
@@ -23267,7 +23265,7 @@ var App = function (_Component) {
           'Content-Type': 'application/json'
         }
       }).then(function (res) {
-        return _this5.getReceipts();
+        return _this6.getReceipts();
       }).catch(function (err) {
         return console.error(err);
       });
@@ -23275,7 +23273,7 @@ var App = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this6 = this;
+      var _this7 = this;
 
       return _react2.default.createElement(
         'div',
@@ -23292,7 +23290,7 @@ var App = function (_Component) {
             'button',
             {
               onClick: function onClick(evt) {
-                return _this6.toggleAddReceipt(evt);
+                return _this7.toggleAddReceipt(evt);
               },
               id: 'add-receipt',
               className: 'action-btn'
@@ -23303,7 +23301,7 @@ var App = function (_Component) {
             'button',
             {
               onClick: function onClick(evt) {
-                return _this6.toggleAddReceipt(evt);
+                return _this7.toggleAddReceipt(evt);
               },
               id: 'add-receipt',
               className: 'action-btn'
@@ -23315,7 +23313,7 @@ var App = function (_Component) {
             'button',
             {
               onClick: function onClick(evt) {
-                return _this6.toggleShowCamera(evt);
+                return _this7.toggleShowCamera(evt);
               },
               id: 'start-camera',
               className: 'action-btn'
@@ -23326,7 +23324,7 @@ var App = function (_Component) {
             'button',
             {
               onClick: function onClick(evt) {
-                return _this6.toggleShowCamera(evt);
+                return _this7.toggleShowCamera(evt);
               },
               id: 'start-camera',
               className: 'action-btn'
@@ -23337,7 +23335,9 @@ var App = function (_Component) {
         ),
         this.state.showAddReceipt ? _react2.default.createElement(_AddReceipt2.default, {
           saveReceipt: this.saveReceipt,
-          toggleAddReceipt: this.toggleAddReceipt }) : null,
+          toggleAddReceipt: this.toggleAddReceipt,
+          merchantName: this.state.merchantName,
+          amount: this.state.amount }) : null,
         this.state.showCamera ? _react2.default.createElement(_SnapReceipt2.default, {
           takeSnapshot: this.takeSnapshot,
           toggleShowCamera: this.toggleShowCamera }) : null,
@@ -34524,72 +34524,72 @@ var AddReceipt = function (_Component) {
     var _this = _possibleConstructorReturn(this, (AddReceipt.__proto__ || Object.getPrototypeOf(AddReceipt)).call(this, props));
 
     _this.state = {
-      merchant: '',
-      amount: ''
+      merchant: _this.props.merchantName,
+      amount: _this.props.amount
     };
     _this.handleFormEntry = _this.handleFormEntry.bind(_this);
     return _this;
   }
 
   _createClass(AddReceipt, [{
-    key: 'handleFormEntry',
+    key: "handleFormEntry",
     value: function handleFormEntry(evt) {
       evt.preventDefault();
       this.setState(_defineProperty({}, evt.target.name, evt.target.value));
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var _this2 = this;
 
       return _react2.default.createElement(
-        'div',
-        { id: 'receipt-entry' },
+        "div",
+        { id: "receipt-entry" },
         _react2.default.createElement(
-          'form',
+          "form",
           null,
-          _react2.default.createElement('input', {
-            id: 'merchant',
-            name: 'merchant',
-            type: 'text',
-            placeholder: 'Merchant',
+          _react2.default.createElement("input", {
+            id: "merchant",
+            name: "merchant",
+            type: "text",
+            placeholder: "Merchant",
             value: this.state.merchant,
             onChange: this.handleFormEntry
           }),
-          _react2.default.createElement('input', {
-            id: 'amount',
-            name: 'amount',
-            type: 'text',
-            placeholder: 'Amount',
+          _react2.default.createElement("input", {
+            id: "amount",
+            name: "amount",
+            type: "text",
+            placeholder: "Amount",
             value: this.state.amount,
             onChange: this.handleFormEntry
           })
         ),
         _react2.default.createElement(
-          'div',
-          { id: 'receipt-btns' },
+          "div",
+          { id: "receipt-btns" },
           _react2.default.createElement(
-            'button',
+            "button",
             {
-              id: 'cancel-receipt',
+              id: "cancel-receipt",
               onClick: function onClick(evt) {
                 return _this2.props.toggleAddReceipt(evt);
               }
             },
-            _react2.default.createElement('i', { className: 'fa fa-times', 'aria-hidden': 'true' }),
-            '\xA0Cancel'
+            _react2.default.createElement("i", { className: "fa fa-times", "aria-hidden": "true" }),
+            "\xA0Cancel"
           ),
           _react2.default.createElement(
-            'button',
+            "button",
             {
-              id: 'save-receipt',
-              className: 'action-btn',
+              id: "save-receipt",
+              className: "action-btn",
               onClick: function onClick(evt) {
                 return _this2.props.saveReceipt(evt, _this2.state.merchant, _this2.state.amount);
               }
             },
-            _react2.default.createElement('i', { className: 'fa fa-floppy-o', 'aria-hidden': 'true' }),
-            '\xA0Save'
+            _react2.default.createElement("i", { className: "fa fa-floppy-o", "aria-hidden": "true" }),
+            "\xA0Save"
           )
         )
       );
@@ -34763,6 +34763,7 @@ var ReceiptTags = function (_Component) {
     key: 'removeTagInput',
     value: function removeTagInput(evt) {
       evt.preventDefault();
+      console.log(evt.target);
       this.setState({ tagInputs: [] });
     }
   }, {

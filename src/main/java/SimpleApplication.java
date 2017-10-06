@@ -49,10 +49,10 @@ public class SimpleApplication extends Application<Configuration> {
 
 		// Register all Controllers below.  Don't forget
 		// you need class and method @Path annotations!
-		env.jersey().register(new HelloWorldController());
 		env.jersey().register(new ReceiptController(receiptDao));
 		env.jersey().register(new TagController(receiptDao));
 		env.jersey().register(new ReceiptImageController());
 		env.jersey().setUrlPattern("/api/*");
+		env.jersey().register(new HelloWorldController());
 	}
 }

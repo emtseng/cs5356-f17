@@ -13,6 +13,7 @@ class ReceiptTags extends Component {
   }
   removeTagInput(evt) {
     evt.preventDefault()
+    console.log(evt.target)
     this.setState({ tagInputs: [] })
   }
   handleAddTag(evt) {
