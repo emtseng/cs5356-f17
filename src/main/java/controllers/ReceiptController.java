@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 import static java.util.stream.Collectors.toList;
 
-@Path("/receipts")
+@Path("/api/receipts")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ReceiptController {

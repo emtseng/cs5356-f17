@@ -14,7 +14,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import static java.lang.System.out;
 
-@Path("/images")
+@Path("/api/images")
 @Consumes(MediaType.TEXT_PLAIN)
 @Produces(MediaType.APPLICATION_JSON)
 public class ReceiptImageController {

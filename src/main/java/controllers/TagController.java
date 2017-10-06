@@ -10,7 +10,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-@Path("/tags/{tag}")
+@Path("/api/tags/{tag}")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class TagController {

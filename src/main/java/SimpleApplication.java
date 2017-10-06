@@ -1,7 +1,4 @@
-import controllers.HelloWorldController;
-import controllers.ReceiptController;
-import controllers.TagController;
-import controllers.ReceiptImageController;
+import controllers.*;
 
 import dao.ReceiptDao;
 import io.dropwizard.Application;
@@ -38,7 +35,7 @@ public class SimpleApplication extends Application<Configuration> {
 
 	@Override
 	public void initialize(Bootstrap<Configuration> bootstrap) {
-		bootstrap.addBundle(new AssetsBundle("/assets", "/", "index.html"));
+		bootstrap.addBundle(new AssetsBundle("/assets", "/assets", "index.html"));
 	}
 
 	@Override
@@ -52,7 +49,7 @@ public class SimpleApplication extends Application<Configuration> {
 		env.jersey().register(new ReceiptController(receiptDao));
 		env.jersey().register(new TagController(receiptDao));
 		env.jersey().register(new ReceiptImageController());
-		env.jersey().setUrlPattern("/api/*");
 		env.jersey().register(new HelloWorldController());
+		env.jersey().register(new IndexController());
 	}
 }
