@@ -1,8 +1,8 @@
 # Receipt Tracker
 
-[![CircleCI](https://circleci.com/gh/emtseng/cs5356-f17.svg?style=svg)](https://circleci.com/gh/emtseng/cs5356-f17)
+[![CircleCI](https://circleci.com/gh/emtseng/receipt-tracker.svg?style=svg)](https://circleci.com/gh/emtseng/receipt-tracker)
 
-Production: [v.2.0](http://ec2-54-82-243-98.compute-1.amazonaws.com)
+Production: [v.3.0](https://receipt-tracker.emtseng.me): OCR enabled
 
 A simple app for recording and tracking receipts. Java-based backend and API, React frontend.
 
@@ -19,7 +19,8 @@ This project is built on Adam Fleming's [skeleton](https://github.com/amfleming/
 
 ## Pushing to AWS (after setup)
 1. Run `docker images` to find the tag for your AWS cluster. It'll be something along the lines of `YOUR_ACCOUNT_ID.dkr.ecr.YOUR_REGION.amazonaws.com/YOUR_APP_NAME`
-2. Re-build an image tagged for your AWS cluster: `docker build -t YOUR_AWS_TAG .`
-3. Push the image: `docker push YOUR_AWS_TAG`
+2. Run `gradle build`.
+3. Re-build an image tagged for your AWS cluster: `docker build -t YOUR_AWS_TAG .`
+4. Push the image: `docker push YOUR_AWS_TAG`
 
 You may need to log into AWS again. If prompted, enter ```aws ecr get-login --no-include-email``` for Docker 17.06+.
