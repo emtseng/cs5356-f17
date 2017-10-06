@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import $ from 'jquery'
 
 class SnapReceipt extends Component {
   constructor(props) {
