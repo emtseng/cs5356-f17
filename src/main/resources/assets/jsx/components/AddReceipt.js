@@ -4,8 +4,8 @@ class AddReceipt extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      merchant: '',
-      amount: ''
+      merchant: this.props.merchantName,
+      amount: this.props.amount
     }
     this.handleFormEntry = this.handleFormEntry.bind(this)
   }
